@@ -1,0 +1,72 @@
+<div class="menu">
+  <div class="menuMain" (click)="showHide()">
+    File
+  </div>
+  <div class="fileEdit" [ngStyle]="menuVisible()">
+    <div>
+      <label for="file" class="custom-file-upload">
+        <input type="file" id="file"  (change)="handleFileInput($event)" onclick="this.value= null;"> Open File....
+      </label>
+    </div>
+    <div class="menuContainer" (click)="download('download')">
+      Save
+    </div>
+    <div class="menuContainer" (click)="download('downloadAs')">
+      Save As....
+    </div>
+  </div>
+</div>
+<div class="body">
+  <div class="contnent">
+    <div class="authContainer">
+      <label>Token: </label>
+      <input type="text" class="tokenInput">
+      <button type="submit" class="authenticate">Auth</button>
+    </div>
+      <div class="editContainer">
+        <form [formGroup]="form" id="form" name="form" (ngSubmit)="submitStyles()">
+          <div *ngFor="let btn of btnStyles; index as i" class="styleContainer" [id]='"styleContainer_"+i'>
+            <div class="labelBox">
+              <label>{{btn.name}}</label>
+            </div>
+            <div *ngIf="isRadio(btn); then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <div class="inputRadioBox">
+                <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="True">
+                <label>True</label>
+              </div>
+              <div class="inputRadioBox">
+                <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="False">
+                <label>False</label>
+              </div>
+            </ng-template>
+            <ng-template #elseBlock>
+              <div *ngIf="isNumber(btn); then else2Block else else3Block"></div>
+              <ng-template #else2Block>
+                <div class="inputNumberBox">
+                  <input type="number" min="0" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
+                </div>
+              </ng-template>
+              <ng-template #else3Block>
+                <div *ngIf="isDate(btn); then else4Block else else5Block"></div>
+                <ng-template #else4Block>
+                  <div class="inputDateBox">
+                    <input type="date" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
+                  </div>
+                </ng-template>
+                <ng-template #else5Block>
+                  <div class="inputBox">
+                    <input type={{btn.type}} class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
+                  </div>
+                </ng-template>
+              </ng-template>
+            </ng-template>
+          </div>
+        </form>
+      </div>
+      <div class="submitContainer">
+        <button type="reset" form="form" class="submitButton">Clear</button>
+        <button type="submit" form="form" class="submitButton">OK</button>
+      </div>
+  </div>
+</div>
