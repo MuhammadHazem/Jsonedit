@@ -1,7 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Console } from 'console';
-import { exit } from 'process';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -14,6 +13,7 @@ export class AppComponent {
   menuVis = false;
   file: any;
   checkedCounter = 1;
+  btnjson: any = {};
   btnStyles = [
     {
       field: "button_callback",
@@ -228,36 +228,36 @@ export class AppComponent {
   ]
 
   form = this.fb.group({
-    "button_callback": new FormControl("", Validators.required),
-    "next_menu": new FormControl("", Validators.required),
-    "button_span": new FormControl("", Validators.required),
-    "button_order": new FormControl("", Validators.required),
-    "button_text_color": new FormControl("", Validators.required),
-    "button_bg_color": new FormControl("", Validators.required),
-    "button_label": new FormControl("", Validators.required),
-    "button_url": new FormControl("", Validators.required),
-    "button_query": new FormControl("", Validators.required),
-    "api_id": new FormControl("", Validators.required),
-    "button_type": new FormControl("", Validators.required),
-    "button_keyboard": new FormControl("", Validators.required),
-    "Button-form_type": new FormControl("", Validators.required),
-    "Button_style": new FormControl("", Validators.required),
-    "Button_data": new FormControl("", Validators.required),
-    "Button_db": new FormControl("", Validators.required),
-    "button_value": new FormControl("", Validators.required),
-    "button_hint": new FormControl("", Validators.required),
-    "button_sub-label": new FormControl("", Validators.required),
-    "button_format": new FormControl("", Validators.required),
-    "button_start_date": new FormControl("", Validators.required),
-    "button_end_date": new FormControl("", Validators.required),
-    "button_age_verification": new FormControl("", Validators.required),
-    "button_past_date": new FormControl("", Validators.required),
-    "button_future_date": new FormControl("", Validators.required),
-    "button_list_option": new FormControl("", Validators.required),
-    "button_list_option_selection": new FormControl("", Validators.required),
-    "button_min_value": new FormControl("", Validators.required),
-    "button_max_value": new FormControl("", Validators.required),
-    "button_step_value": new FormControl("", Validators.required)
+    "button_callback": new FormControl(null,Validators.required),
+    "next_menu": new FormControl(),
+    "button_span": new FormControl(),
+    "button_order": new FormControl(),
+    "button_text_color": new FormControl(),
+    "button_bg_color": new FormControl(),
+    "button_label": new FormControl(),
+    "button_url": new FormControl(),
+    "button_query": new FormControl(),
+    "api_id": new FormControl(),
+    "button_type": new FormControl(null,Validators.required),
+    "button_keyboard": new FormControl(),
+    "Button-form_type": new FormControl(null,Validators.required),
+    "Button_style": new FormControl(null,Validators.required),
+    "Button_data": new FormControl(),
+    "Button_db": new FormControl(null,Validators.required),
+    "button_value": new FormControl(),
+    "button_hint": new FormControl(),
+    "button_sub-label": new FormControl(),
+    "button_format": new FormControl(),
+    "button_start_date": new FormControl(),
+    "button_end_date": new FormControl(),
+    "button_age_verification": new FormControl(),
+    "button_past_date": new FormControl(),
+    "button_future_date": new FormControl(),
+    "button_list_option": new FormControl(),
+    "button_list_option_selection": new FormControl(),
+    "button_min_value": new FormControl(),
+    "button_max_value": new FormControl(),
+    "button_step_value": new FormControl()
   });
 
   constructor(private ref: ChangeDetectorRef, private fb: FormBuilder){
@@ -271,7 +271,7 @@ export class AppComponent {
     console.log("Submit");
     let fulfilled = true;
     Object.keys(this.form.controls).forEach(key => {
-      if(this.form.get(key)?.value == "" && this.required.includes(key)){
+      if(this.form.get(key)?.value == null && this.required.includes(key)){
         // let index = this.btnStyles.map(btn => btn.field).indexOf(key);
         // let input = document.getElementById("styleInput_"+index);
         // input!.style.borderColor = "red";
@@ -292,6 +292,16 @@ export class AppComponent {
           }
         });
       });
+      this.btnjson = {};
+      Object.keys(this.form.controls).forEach(key => {
+        let value = this.form.get(key)!.value;
+        if(value == ''){
+          value = null;
+        }
+        this.btnjson[key] = value;
+      });
+      let file = JSON.stringify(this.btnjson);
+      console.log(file);
       //-------------------------------Submit---------------------------------------------
     }else{
       window.alert("Inputs required");
