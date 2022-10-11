@@ -20,8 +20,8 @@
   <div class="contnent">
     <div class="authContainer">
       <label>Token: </label>
-      <input type="text" class="tokenInput">
-      <button type="submit" class="authenticate">Auth</button>
+      <input type="text" id="auth" class="tokenInput">
+      <button type="submit" (click)="authenticate()" class="authenticate">Auth</button>
     </div>
       <div class="editContainer">
         <form [formGroup]="form" id="form" name="form" (ngSubmit)="submitStyles()">

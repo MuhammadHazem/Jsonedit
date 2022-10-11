@@ -394,5 +394,11 @@ export class AppComponent {
     }
     return false;
   }
+
+  authenticate(){
+    let input: any = document.getElementById('auth');
+    let token = input.value;
+    console.log(token);
+  }
 }
 
