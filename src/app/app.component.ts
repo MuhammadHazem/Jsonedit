@@ -1,8 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-const NandBox = require("nandbox-bot-api/src/NandBox");
-const Nand = require("nandbox-bot-api/src/NandBoxClient");
-const NandBoxClient = Nand.NandBoxClient;
 
 @Component({
   selector: 'app-root',
