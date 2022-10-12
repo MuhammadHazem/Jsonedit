@@ -19,54 +19,98 @@
 <div class="body">
   <div class="contnent">
     <div class="authContainer">
-      <label>Token: </label>
-      <input type="text" id="auth" class="tokenInput">
-      <button type="submit" (click)="authenticate()" class="authenticate">Auth</button>
+      <div class="authVarBox">
+        <div class="tokenVars">
+          <div class="tokenVar">
+            <label class="authlabel">Token: </label>
+            <input type="text" id="auth" class="tokenInput">
+          </div>
+          <div class="tokenVar">
+            <label class="authlabel">URL: </label>
+            <input type="text" id="url" class="tokenInput">
+          </div>
+        </div>
+        <button type="submit" (click)="authenticate()" class="authButton">Auth</button>
+      </div>
+      <div class="statusBox">
+        <label>Status: {{status}}</label>
+      </div>
     </div>
       <div class="editContainer">
         <form [formGroup]="form" id="form" name="form" (ngSubmit)="submitStyles()">
-          <div *ngFor="let btn of btnStyles; index as i" class="styleContainer" [id]='"styleContainer_"+i'>
-            <div class="labelBox">
-              <label>{{btn.name}}</label>
+          <div class="jsonInputs">
+            <div class="styleContainer">
+              <div class="labelBox">
+                <label>User ID</label>
+              </div>
+              <div class="inputNumberBox">
+                <input type="number" min="0" class="styleInput" id="styleInput_-2" name="User ID" formControlName="user_id">
+              </div>
             </div>
-            <div *ngIf="isRadio(btn); then thenBlock else elseBlock"></div>
-            <ng-template #thenBlock>
-              <div class="inputRadioBox">
-                <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="True">
-                <label>True</label>
+            <div class="styleContainer">
+              <div class="labelBox">
+                <label>Screen ID</label>
               </div>
-              <div class="inputRadioBox">
-                <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="False">
-                <label>False</label>
+              <div class="inputBox">
+                <input type="text" class="styleInput" id="styleInput_-1" name="Screen ID" formControlName="screen_id">
               </div>
-            </ng-template>
-            <ng-template #elseBlock>
-              <div *ngIf="isNumber(btn); then else2Block else else3Block"></div>
-              <ng-template #else2Block>
-                <div class="inputNumberBox">
-                  <input type="number" min="0" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
+            </div>
+          </div>
+          <div class="styleContainers">
+            <div *ngFor="let btn of btnStyles; index as i" class="styleContainer" [id]='"styleContainer_"+i'>
+              <div class="labelBox">
+                <label>{{btn.name}}</label>
+              </div>
+              <div *ngIf="isRadio(btn); then thenBlock else elseBlock"></div>
+              <ng-template #thenBlock>
+                <div class="inputRadioBox">
+                  <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="True">
+                  <label>True</label>
+                </div>
+                <div class="inputRadioBox">
+                  <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="False">
+                  <label>False</label>
                 </div>
               </ng-template>
-              <ng-template #else3Block>
-                <div *ngIf="isDate(btn); then else4Block else else5Block"></div>
-                <ng-template #else4Block>
-                  <div class="inputDateBox">
-                    <input type="date" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
+              <ng-template #elseBlock>
+                <div *ngIf="isNumber(btn); then else2Block else else3Block"></div>
+                <ng-template #else2Block>
+                  <div class="inputNumberBox">
+                    <input type="number" min="0" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
                   </div>
                 </ng-template>
-                <ng-template #else5Block>
-                  <div class="inputBox">
-                    <input type={{btn.type}} class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
-                  </div>
+                <ng-template #else3Block>
+                  <div *ngIf="isDate(btn); then else4Block else else5Block"></div>
+                  <ng-template #else4Block>
+                    <div class="inputDateBox">
+                      <input type="date" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
+                    </div>
+                  </ng-template>
+                  <ng-template #else5Block>
+                    <div *ngIf="isColor(btn); then else6Block else else7Block"></div>
+                    <ng-template #else6Block>
+                      <div class="inputBox">
+                        <input type="color" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
+                      </div>
+                    </ng-template>
+                    <ng-template #else7Block>
+                      <div class="inputBox">
+                        <input type={{btn.type}} class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}}>
+                      </div>
+                    </ng-template>
+                  </ng-template>
                 </ng-template>
               </ng-template>
-            </ng-template>
+            </div>
           </div>
         </form>
       </div>
       <div class="submitContainer">
-        <button type="reset" form="form" class="submitButton">Clear</button>
-        <button type="submit" form="form" class="submitButton">OK</button>
+        <button type="reset" form="form" class="submitButton" (click)="clearReply()">Clear</button>
+        <button type="submit" form="form" class="submitButton">Save & Send</button>
       </div>
+      <textarea>
+        {{serverReply}}
+      </textarea>
   </div>
 </div>

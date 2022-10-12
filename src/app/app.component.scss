@@ -21,23 +21,60 @@
   .authContainer{
     border: solid red;
     width: 70%;
-    height: 10%;
-    margin: 2.5%;
+    margin-top: 2.5%;
+    margin-bottom: 1.5%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  .tokenInput{
+  .authVarBox{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tokenVars{
     width: 70%;
+  }
+
+  .tokenVar{
+    margin: 1%;
+  }
+
+  .authlabel{
+    display: inline-block;
+    width: 15%;
+  }
+
+  .tokenInput{
+    width: 82%;
+  }
+
+  .authButton{
+    width: 70px;
+    height: 50px;
+  }
+
+  .statusBox{
     margin: 1%;
   }
 
   .editContainer{
-    border: solid green;
     width: 70%;
     height: 60%;
-    margin: 2.5%;
+  }
+
+  .jsonInputs{
+    border: solid green;
+    margin: 1.5% 0%;
+  }
+
+  .styleContainers{
+    border: solid green;
+    margin-top: 1.5%;
   }
 
   .styleContainer{
@@ -54,7 +91,6 @@
 
   .inputBox{
     width: 30%;
-    // margin: 0% 5%;
   }
 
   .inputRadioBox{
@@ -64,13 +100,11 @@
   }
 
   .inputNumberBox{
-    width: 17%;
-    // margin: 0% 10%;
+    width: 25%;
   }
 
   .inputDateBox{
     width: 20%;
-    // margin: 0% 10%;
   }
 
   .styleInput{
@@ -170,5 +204,12 @@
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  textarea{
+    resize: vertical;
+    width: 70%;
+    height: 300px;
+    margin-bottom: 1.5%;
   }
 }

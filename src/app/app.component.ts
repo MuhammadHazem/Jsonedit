@@ -14,6 +14,12 @@ export class AppComponent {
   file: any;
   checkedCounter = 1;
   btnjson: any = {};
+  url: any = "wss://d1.nandbox.net:5020/nandbox/api/";
+  serverReply = "";
+  status = "DISCONNECTED";
+  ws: any;
+  userID: any;
+  screenID: any;
   btnStyles = [
     {
       field: "button_callback",
@@ -228,6 +234,8 @@ export class AppComponent {
   ]
 
   form = this.fb.group({
+    "user_id": new FormControl(null,Validators.required),
+    "screen_id": new FormControl(null,Validators.required),
     "button_callback": new FormControl(null,Validators.required),
     "next_menu": new FormControl(),
     "button_span": new FormControl(),
@@ -275,7 +283,7 @@ export class AppComponent {
         // let index = this.btnStyles.map(btn => btn.field).indexOf(key);
         // let input = document.getElementById("styleInput_"+index);
         // input!.style.borderColor = "red";
-        fulfilled = false;
+        // fulfilled = false;
       }else{
         // let index = this.btnStyles.map(btn => btn.field).indexOf(key);
         // console.log(index)
@@ -290,6 +298,12 @@ export class AppComponent {
           if(btn.field == key){
             btn.value = this.form.get(key)?.value;
           }
+          if(key == "user_id"){
+            this.userID = this.form.get(key)?.value
+          }
+          if(key == "screen_id"){
+            this.screenID = this.form.get(key)?.value
+          }
         });
       });
       this.btnjson = {};
@@ -300,9 +314,18 @@ export class AppComponent {
         }
         this.btnjson[key] = value;
       });
-      let file = JSON.stringify(this.btnjson);
+      this.btnjson = JSON.stringify(this.btnjson);
+      let file = JSON.stringify(
+        {
+          "method": "sendcellText",
+          "user_id": this.userID,
+          "screen_id": this.screenID,
+          "cell_id": "",
+          "text": this.btnjson
+        }
+      )
       console.log(file);
-      //-------------------------------Submit---------------------------------------------
+      this.sendRequest(file)
     }else{
       window.alert("Inputs required");
     }
@@ -310,7 +333,38 @@ export class AppComponent {
 
   download(saveLocation: any){
     let a = document.createElement("a");
-    let file = new Blob([JSON.stringify(this.btnStyles)], {type: 'text/plain'});
+    Object.keys(this.form.controls).forEach(key => {
+      this.btnStyles.forEach(btn => {
+        if(btn.field == key){
+          btn.value = this.form.get(key)?.value;
+        }
+        if(key == "user_id"){
+          this.userID = this.form.get(key)?.value
+        }
+        if(key == "screen_id"){
+          this.screenID = this.form.get(key)?.value
+        }
+      });
+    });
+    let downloadArray = this.btnStyles.slice();
+    downloadArray.push(
+      {
+        field: "user_id",
+        name: "User ID",
+        type: "Number",
+        required: true,
+        value: this.userID
+      },
+      {
+        field: "screen_id",
+        name: "Screen ID",
+        type: "String",
+        required: true,
+        value: this.screenID
+      }
+    );
+    let file = new Blob([JSON.stringify(downloadArray)], {type: 'text/plain'});
+
     let filename: any;
     if(saveLocation === "downloadAs"){
       filename = window.prompt('Please enter a name for your file', 'sample');
@@ -323,6 +377,7 @@ export class AppComponent {
     a.href = URL.createObjectURL(file);
     a.download =  filename+".txt";
     a.click();
+    this.menuVis = false;
   }
 
   handleFileInput(e: any) {
@@ -392,11 +447,66 @@ export class AppComponent {
     }
     return false;
   }
+  isColor(btn: any){
+    if(btn.type == "Color"){
+      return true;
+    }
+    return false;
+  }
 
   authenticate(){
-    let input: any = document.getElementById('auth');
-    let token = input.value;
-    console.log(token);
+    let tokenInput: any = document.getElementById('auth');
+    let token = tokenInput.value;
+    let urlInput: any = document.getElementById('url');
+    this.url = urlInput.value;
+
+    let authenticatetxt = JSON.stringify({ "token": token, "rem": true, "method": "TOKEN_AUTH" });
+
+    this.sendRequest(authenticatetxt);
+  }
+
+  web(data: any){
+  }
+
+  sendRequest(data: any) {
+    if (!this.ws || this.ws.readyState != WebSocket.OPEN) {
+      console.log("url: " + this.url);
+      this.ws = new WebSocket(this.url);
+      this.ws.addEventListener('open', (evt: any) => {
+        this.status = "CONNECTED";
+        console.log(data);
+        this.sendTheRequest(data);
+      });
+      this.ws.addEventListener('message', (evt: any) => {
+        this.serverReply = evt.data;
+        console.log(this.serverReply);
+      });
+      this.ws.addEventListener('close', (evt: any) => {
+        this.status = "DISCONNECTED";
+      });
+    }
+    else {
+      this.sendTheRequest(data);
+    }
+  }
+
+  sendTheRequest(data: any) {
+    console.log("sending request" + data);
+    if (!this.ws || this.ws.readyState != WebSocket.OPEN){
+      throw "WebSocket not open";
+    }
+    this.ws.send(data);
+  }
+
+  clearReply() {
+    this.serverReply = "";
   }
 }
+
+
+
+
+
+
+
 
