@@ -70,6 +70,7 @@
   .jsonInputs{
     border: solid green;
     margin: 1.5% 0%;
+    display: flex;
   }
 
   .styleContainers{
@@ -81,6 +82,24 @@
     display: flex;
     flex-direction: row;
     margin: 5px 0;
+  }
+
+  .jsonStyleContainers{
+    width: 85%;
+    margin: 0px;
+  }
+
+  .echoContainer{
+    width: 15%;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+  }
+
+  .jsonStyleContainer{
+    display: flex;
+    flex-direction: row;
+    margin: 5px 1px;
   }
 
   .labelBox{

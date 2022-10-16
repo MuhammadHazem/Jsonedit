@@ -39,21 +39,27 @@
       <div class="editContainer">
         <form [formGroup]="form" id="form" name="form" (ngSubmit)="submitStyles()">
           <div class="jsonInputs">
-            <div class="styleContainer">
-              <div class="labelBox">
-                <label>User ID</label>
+            <div class="jsonStyleContainers">
+              <div class="jsonStyleContainer">
+                <div class="labelBox">
+                  <label>User ID</label>
+                </div>
+                <div class="inputNumberBox">
+                  <input type="text" class="styleInput" id="styleInput_-2" name="User ID" formControlName="user_id">
+                </div>
               </div>
-              <div class="inputNumberBox">
-                <input type="text" class="styleInput" id="styleInput_-2" name="User ID" formControlName="user_id">
+              <div class="jsonStyleContainer">
+                <div class="labelBox">
+                  <label>Screen ID</label>
+                </div>
+                <div class="inputBox">
+                  <input type="text" class="styleInput" id="styleInput_-1" name="Screen ID" formControlName="screen_id">
+                </div>
               </div>
             </div>
-            <div class="styleContainer">
-              <div class="labelBox">
-                <label>Screen ID</label>
-              </div>
-              <div class="inputBox">
-                <input type="text" class="styleInput" id="styleInput_-1" name="Screen ID" formControlName="screen_id">
-              </div>
+            <div class="echoContainer">
+              <label>Echo</label>
+              <input type="checkbox" (click)="echoToggle()">
             </div>
           </div>
           <div class="styleContainers">
