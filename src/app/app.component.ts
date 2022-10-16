@@ -226,6 +226,13 @@ export class AppComponent implements OnInit, OnChanges{
       type: "Number",
       required: false,
       value: null
+    },
+    {
+      field: "button_icon_bgcolor",
+      name: "Icon Background Color",
+      type: "Color",
+      required: false,
+      value: null
     }
   ]
 
@@ -260,7 +267,8 @@ export class AppComponent implements OnInit, OnChanges{
     "button_list_option_selection": new FormControl(),
     "button_min_value": new FormControl(),
     "button_max_value": new FormControl(),
-    "button_step_value": new FormControl()
+    "button_step_value": new FormControl(),
+    "button_icon_bgcolor": new FormControl()
   });
 
   constructor(private ref: ChangeDetectorRef, private fb: FormBuilder){
@@ -322,6 +330,7 @@ export class AppComponent implements OnInit, OnChanges{
         btnData[key] = value;
       }
     });
+    btnData["button_icon"] = this.svgPath;
     this.btnjson = data;
     this.btnjson.push(btnData);
     this.btnjson = JSON.stringify(this.btnjson);
@@ -369,6 +378,13 @@ export class AppComponent implements OnInit, OnChanges{
         type: "String",
         required: true,
         value: this.screenID
+      },
+      {
+        field: "button_icon",
+        name: "Icon",
+        type: "SVG Path",
+        required: false,
+        value: this.svgPath
       }
     );
     let file = new Blob([JSON.stringify(downloadArray)], {type: 'text/plain'});
@@ -432,7 +448,11 @@ export class AppComponent implements OnInit, OnChanges{
   setData(array: any){
     array.forEach((e: any) => {
       Object.keys(this.form.controls).forEach(key => {
-        this.form.setControl(e.field, this.fb.control(e.value, Validators.required));
+        if(e.field === "icon"){
+          this.svgPath = e.value;
+        }else{
+          this.form.setControl(e.field, this.fb.control(e.value, Validators.required));
+        }
       });
    });
   }
@@ -721,6 +741,7 @@ selectedSeaction = 'firstSeaction';
 ngOnInit(): void {
   if (!this.iconList) {
     this.iconList = this.MOBILE_TYPES.ANDROID;
+    console.log(this.iconList);
   }
 }
 ngOnChanges() {
@@ -1049,6 +1070,7 @@ autoCloseDisplay() {
 
 selectItem(item: string) {
   this.svgPath = { ...this.svgPath, name: item };
+  console.log(this.svgPath)
 }
 
 updateItemIconEvent(value: string) {
@@ -1058,11 +1080,12 @@ updateItemIconEvent(value: string) {
 }
 
 showMenu() {
-  if (this.showIconsMenu) {
+  if (this.showIconsMenu == true) {
     this.showIconsMenu = false;
   } else {
     this.showIconsMenu = true;
   }
+  // console.log("showICOnsMenu:",this.showIconsMenu)
 }
 
 get iconFirstTabStyle() {

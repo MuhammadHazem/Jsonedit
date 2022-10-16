@@ -213,9 +213,6 @@
     margin-bottom: 1.5%;
   }
 
-  @import 'variables';
-  @import 'functions';
-  @import 'mixins';
   @media (max-width: 1399px) {
     margin-right: 3px;
   }
@@ -224,42 +221,44 @@
     margin-right: unset;
   }
   .dropdown-menu {
-    width: em(300);
+    width: 250px;
+    border: solid black;
+    padding: 0%;
   }
 
   .icon-icon2 {
-    fill: $black;
-    width: em(12);
-    height: em(12);
+    fill: black;
+    width: 12px;
+    height: 12px;
   }
 
   .icon-icon {
-    fill: $black;
-    width: em(18);
-    height: em(18);
+    fill: black;
+    width: 18px;
+    height: 18px;
   }
   .open > .dropdown-menu {
-    width: 353%;
+    width: 140%;
     margin-bottom: 100px;
   }
   #dropDownDiv {
     position: relative;
-    height: em(29);
+    height: 29px;
     border-radius: 3px;
   }
   .btn-group {
     display: flex;
-    width: em(80);
+    width: 300px;
   }
   .icon-image {
-    width: em(20);
-    height: em(20);
+    width: 20px;
+    height: 20px;
     margin-top: 2px;
   }
   .btn-svg {
-    width: em(50);
+    width: 50px;
     color: #000000;
-    height: em(23);
+    height: 23px;
     border-radius: 3px;
     border: solid 1px #ded9d9;
     background-color: #ffff;
@@ -269,9 +268,10 @@
     align-items: center;
   }
   #button-split {
-    width: em(25);
+    width: 25px;
   }
   .icon-seactions {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid #a4a5a7;
@@ -286,7 +286,6 @@
   }
   .seaction {
     padding: 5px;
-    display: fe;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -296,12 +295,14 @@
     display: flex;
     flex-wrap: wrap;
     padding: 10px 0 5px 0;
-    max-height: em(200);
+    max-height: 200px;
     overflow-y: scroll;
   }
   .icon-element {
-    margin: 5px;
+    padding: 5px;
   }
-
+  ul {
+    list-style-type: none;
+  }
 
 }
