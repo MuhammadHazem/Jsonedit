@@ -44,7 +44,7 @@
                 <label>User ID</label>
               </div>
               <div class="inputNumberBox">
-                <input type="number" min="0" class="styleInput" id="styleInput_-2" name="User ID" formControlName="user_id">
+                <input type="text" class="styleInput" id="styleInput_-2" name="User ID" formControlName="user_id">
               </div>
             </div>
             <div class="styleContainer">
@@ -64,11 +64,11 @@
               <div *ngIf="isRadio(btn); then thenBlock else elseBlock"></div>
               <ng-template #thenBlock>
                 <div class="inputRadioBox">
-                  <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="True">
+                  <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="1">
                   <label>True</label>
                 </div>
                 <div class="inputRadioBox">
-                  <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="False">
+                  <input type="radio" class="styleInput" [id]='"styleInput_"+i' name={{btn.field}} formControlName={{btn.field}} value="0">
                   <label>False</label>
                 </div>
               </ng-template>

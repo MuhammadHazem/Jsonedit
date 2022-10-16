@@ -13,10 +13,12 @@ export class AppComponent {
   menuVis = false;
   file: any;
   checkedCounter = 1;
-  btnjson: any = {};
+  btnjson: any = [];
   url: any = "wss://d1.nandbox.net:5020/nandbox/api/";
   serverReply = "";
   status = "DISCONNECTED";
+  buttonData: any;
+  serverReplyData: any;
   ws: any;
   userID: any;
   screenID: any;
@@ -50,14 +52,14 @@ export class AppComponent {
       value: null
     },
     {
-      field: "button_text_color",
+      field: "button_textcolor",
       name: "Text Color",
       type: "Color",
       required: false,
       value: null
     },
     {
-      field: "button_bg_color",
+      field: "button_bgcolor",
       name: "Background Color",
       type: "Color",
       required: false,
@@ -117,13 +119,6 @@ export class AppComponent {
       name: "Style",
       type: "String",
       required: true,
-      value: null
-    },
-    {
-      field: "Button_data",
-      name: "Data",
-      type: "String",
-      required: false,
       value: null
     },
     {
@@ -240,8 +235,8 @@ export class AppComponent {
     "next_menu": new FormControl(),
     "button_span": new FormControl(),
     "button_order": new FormControl(),
-    "button_text_color": new FormControl(),
-    "button_bg_color": new FormControl(),
+    "button_textcolor": new FormControl(),
+    "button_bgcolor": new FormControl(),
     "button_label": new FormControl(),
     "button_url": new FormControl(),
     "button_query": new FormControl(),
@@ -250,7 +245,6 @@ export class AppComponent {
     "button_keyboard": new FormControl(),
     "Button-form_type": new FormControl(null,Validators.required),
     "Button_style": new FormControl(null,Validators.required),
-    "Button_data": new FormControl(),
     "Button_db": new FormControl(null,Validators.required),
     "button_value": new FormControl(),
     "button_hint": new FormControl(),
@@ -293,42 +287,55 @@ export class AppComponent {
       }
     });
     if(fulfilled){
-      Object.keys(this.form.controls).forEach(key => {
-        this.btnStyles.forEach(btn => {
-          if(btn.field == key){
-            btn.value = this.form.get(key)?.value;
-          }
-          if(key == "user_id"){
-            this.userID = this.form.get(key)?.value
-          }
-          if(key == "screen_id"){
-            this.screenID = this.form.get(key)?.value
-          }
-        });
-      });
-      this.btnjson = {};
-      Object.keys(this.form.controls).forEach(key => {
-        let value = this.form.get(key)!.value;
-        if(value == ''){
-          value = null;
-        }
-        this.btnjson[key] = value;
-      });
-      this.btnjson = JSON.stringify(this.btnjson);
-      let file = JSON.stringify(
-        {
-          "method": "sendcellText",
-          "user_id": this.userID,
-          "screen_id": this.screenID,
-          "cell_id": "",
-          "text": this.btnjson
-        }
-      )
-      console.log(file);
+      let file = this.makeFile([]);
       this.sendRequest(file)
     }else{
       window.alert("Inputs required");
     }
+  }
+
+  makeFile(data: any){
+    if(data == null){
+      data = [];
+    }
+    Object.keys(this.form.controls).forEach(key => {
+      this.btnStyles.forEach(btn => {
+        if(btn.field == key){
+          btn.value = this.form.get(key)?.value;
+        }
+        if(key == "user_id"){
+          this.userID = String(this.form.get(key)?.value);
+        }
+        if(key == "screen_id"){
+          this.screenID = this.form.get(key)?.value
+        }
+      });
+    });
+    let btnData: any = {};
+    Object.keys(this.form.controls).forEach(key => {
+      let value = this.form.get(key)!.value;
+      if(value == ''){
+        value = null;
+      }
+      if(value != null){
+        btnData[key] = value;
+      }
+    });
+    this.btnjson = data;
+    this.btnjson.push(btnData);
+    this.btnjson = JSON.stringify(this.btnjson);
+    console.log(this.btnjson);
+    let file = JSON.stringify(
+      {
+        "method": "sendCellMessage",
+        "user_id": this.userID,
+        "screen_id": this.screenID,
+        "cell_id": "",
+        "text": this.btnjson,
+        "reference": 123456789
+      }
+    )
+    return file;
   }
 
   download(saveLocation: any){
@@ -474,12 +481,19 @@ export class AppComponent {
       this.ws = new WebSocket(this.url);
       this.ws.addEventListener('open', (evt: any) => {
         this.status = "CONNECTED";
-        console.log(data);
         this.sendTheRequest(data);
       });
       this.ws.addEventListener('message', (evt: any) => {
-        this.serverReply = evt.data;
-        console.log(this.serverReply);
+        this.serverReply += "\n" + evt.data;
+        if(JSON.parse(evt.data).method === "chatMenuCallback"){
+          let user_ID = JSON.parse(evt.data).chatMenuCallback.chat.id;
+          let screen_ID = JSON.parse(evt.data).chatMenuCallback.menu_ref;
+          this.form.setControl("user_id", this.fb.control(user_ID, Validators.required));
+          this.form.setControl("screen_id", this.fb.control(screen_ID, Validators.required));
+          let btnData = JSON.parse(evt.data).chatMenuCallback.button_data;
+          console.log(btnData);
+          this.sendTheRequest(this.makeFile(btnData));
+        }
       });
       this.ws.addEventListener('close', (evt: any) => {
         this.status = "DISCONNECTED";
