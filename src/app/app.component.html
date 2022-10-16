@@ -101,6 +101,149 @@
                   </ng-template>
                 </ng-template>
               </ng-template>
+<!----------------------------------------------------------------------------------------------------------------------------------->
+
+              <div
+                class="btn-group"
+                dropdown
+                [isDisabled]="disabled"
+                #dropdown="bs-dropdown"
+                [autoClose]="autoClose"
+                (mouseleave)="autoCloseDisplay()"
+              >
+                <button type="button" class="btn btn-svg">
+                  <svg class="svg-icon icon-icon2">
+                    <use
+                      *ngIf="iconList === 'Android'"
+                      attr.xlink:href="./assets/svg/app-icons.svg#{{ svgPath?.name }}"
+                    ></use>
+                    <use
+                      *ngIf="iconList === 'IOS'"
+                      attr.xlink:href="./assets/svg/app-ios-icons.svg#{{ svgPath?.name }}"
+                    ></use>
+                    <use
+                      *ngIf="iconList === 'postFooter'"
+                      attr.xlink:href="./assets/svg/app-features-icons.svg#{{
+                        svgPath?.name
+                      }}"
+                    ></use>
+                    <use
+                      *ngIf="iconList === 'markers'"
+                      attr.xlink:href="./assets/svg/app-markers-icons.svg#{{ svgPath?.name }}"
+                    ></use>
+                  </svg>
+                </button>
+                <button
+                  id="button-split"
+                  type="button"
+                  dropdownToggle
+                  class="btn btn-svg dropdown-toggle dropdown-toggle-split"
+                  aria-controls="dropdown-split"
+                >
+                  <span class="caret"></span>
+                </button>
+
+                <!-- <div *ngIf="iconList === 'Android'"> -->
+                <ul
+                  id="dropdown-split"
+                  *dropdownMenu
+                  class="dropdown-menu"
+                  role="menu"
+                  aria-labelledby="button-split"
+                >
+                  <div *ngIf="iconList === 'Android'">
+                    <div class="icon-seactions" (click)="dropdown.show()">
+                      <div
+                        class="seaction"
+                        (click)="selectIconSeaction('firstSeaction')"
+                        [ngStyle]="iconFirstTabStyle"
+                      >
+                        General
+                      </div>
+                      <div
+                        class="sec-seaction"
+                        (click)="selectIconSeaction('secSeaction')"
+                        [ngStyle]="iconSecTabStyle"
+                      >
+                        Action
+                      </div>
+                      <div
+                        class="seaction"
+                        (click)="selectIconSeaction('thirdSeaction')"
+                        [ngStyle]="iconThirdTabStyle"
+                      >
+                        Social
+                      </div>
+                    </div>
+                    <div class="icon-container" (click)="dropdown.hide()">
+                      <li
+                        class="icon-element"
+                        *ngFor="let name of iconNames"
+                        role="menuitem"
+                        aria-labelledby="button-split"
+                        (click)="updateItemIconEvent(name)"
+                      >
+                        <svg class="svg-icon icon-icon">
+                          <use attr.xlink:href="./assets/svg/app-icons.svg#{{ name }}"></use>
+                        </svg>
+                      </li>
+                    </div>
+                  </div>
+                  <div *ngIf="iconList === 'IOS'">
+                    <div class="icon-container" (click)="dropdown.hide()">
+                      <li
+                        class="icon-element"
+                        *ngFor="let name of iosNames"
+                        role="menuitem"
+                        aria-labelledby="button-split"
+                        (click)="updateItemIconEvent(name)"
+                      >
+                        <svg class="svg-icon icon-icon">
+                          <use
+                            attr.xlink:href="./assets/svg/app-ios-icons.svg#{{ name }}"
+                          ></use>
+                        </svg>
+                      </li>
+                    </div>
+                  </div>
+                  <div *ngIf="iconList === 'postFooter'">
+                    <div class="icon-container" (click)="dropdown.hide()">
+                      <li
+                        class="icon-element"
+                        *ngFor="let name of postFooterName"
+                        role="menuitem"
+                        aria-labelledby="button-split"
+                        (click)="updateItemIconEvent(name)"
+                      >
+                        <svg class="svg-icon icon-icon">
+                          <use
+                            attr.xlink:href="./assets/svg/app-features-icons.svg#{{ name }}"
+                          ></use>
+                        </svg>
+                      </li>
+                    </div>
+                  </div>
+                  <div *ngIf="iconList === 'markers'">
+                    <div class="icon-container" (click)="dropdown.hide()">
+                      <li
+                        class="icon-element"
+                        *ngFor="let name of locationIconNames"
+                        role="menuitem"
+                        aria-labelledby="button-split"
+                        (click)="updateItemIconEvent(name)"
+                      >
+                        <svg class="svg-icon icon-icon">
+                          <use
+                            attr.xlink:href="./assets/svg/app-markers-icons.svg#{{ name }}"
+                          ></use>
+                        </svg>
+                      </li>
+                    </div>
+                  </div>
+                </ul>
+                <!-- </div> -->
+              </div>
+<!----------------------------------------------------------------------------------------------------------------------------------->
             </div>
           </div>
         </form>
