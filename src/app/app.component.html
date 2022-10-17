@@ -126,19 +126,19 @@
                   <svg class="svg-icon icon-icon2">
                     <use
                       *ngIf="iconList === 'Android'"
-                      attr.xlink:ng-href="./assets/app-icons.svg# {{ svgPath?.name }}"
+                      attr.xlink:href="./assets/app-icons.svg#{{ svgPath?.name }}"
                     ></use>
                     <use
                       *ngIf="iconList === 'IOS'"
-                      attr.xlink:ng-href="./assets/app-ios-icons.svg#{{ svgPath?.name }}"
+                      attr.xlink:href="./assets/app-ios-icons.svg#{{ svgPath?.name }}"
                     ></use>
                     <use
                       *ngIf="iconList === 'postFooter'"
-                      attr.xlink:ng-href="./assets/app-features-icons.svg#{{ svgPath?.name }}"
+                      attr.xlink:href="./assets/app-features-icons.svg#{{ svgPath?.name }}"
                     ></use>
                     <use
                       *ngIf="iconList === 'markers'"
-                      attr.xlink:ng-href="./assets/app-markers-icons.svg#{{ svgPath?.name }}"
+                      attr.xlink:href="./assets/app-markers-icons.svg#{{ svgPath?.name }}"
                     ></use>
                   </svg>
                 </button>
@@ -152,7 +152,6 @@
                   <span class="caret"></span>
                 </button>
 
-                <!-- <div *ngIf="iconList === 'Android'"> -->
                 <ul
                   id="dropdown-split"
                   *dropdownMenu
@@ -250,7 +249,6 @@
                     </div>
                   </div>
                 </ul>
-              <!-- </div> -->
               </div>
             </div>
 <!----------------------------------------------------------------------------------------------------------------------------------->

@@ -1076,6 +1076,7 @@ export class AppComponent implements OnInit, OnChanges{
 
   autoCloseDisplay() {
     this.autoClose = true;
+    console.log(this.autoClose);
   }
 
   selectItem(item: string) {
@@ -1095,7 +1096,6 @@ export class AppComponent implements OnInit, OnChanges{
     } else {
       this.showIconsMenu = true;
     }
-    // console.log("showICOnsMenu:",this.showIconsMenu)
   }
 
   get iconFirstTabStyle() {

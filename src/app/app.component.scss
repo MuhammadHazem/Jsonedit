@@ -243,6 +243,7 @@
     width: 250px;
     border: solid black;
     padding: 0%;
+    display: none;
   }
 
   .icon-icon2 {
@@ -259,6 +260,7 @@
   .open > .dropdown-menu {
     width: 140%;
     margin-bottom: 100px;
+    display: flex;
   }
   #dropDownDiv {
     position: relative;
