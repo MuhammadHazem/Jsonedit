@@ -1,4 +1,516 @@
-<div class="menu">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
+<div class="body">
+  <div class="header">
+    <img src="/assets/logo-copy-3.svg" class="Logo-Copy-3">
+    <div class="Line-43"></div>
+    <div class="file" id="filebtn" (click)="showHide()">
+      <span class="filetxt" id="filetxt">
+        File
+      </span>
+    </div>
+    <div class="fileEdit" [ngStyle]="menuVisible()" id="fileDM" (mouseleave)="showHide()">
+      <div>
+        <label for="file" class="custom-file-upload">
+          <input type="file" id="file"  (change)="handleFileInput($event)" onclick="this.value= null;"> Open File
+        </label>
+      </div>
+      <div class="menuLine"></div>
+      <div class="saveMenuContainer" (click)="download('download')">
+        Save
+      </div>
+      <div class="menuLine"></div>
+      <div class="saveAsMenuContainer" (click)="download('downloadAs')">
+        Save as
+      </div>
+    </div>
+    <button type="submit" class="submit-btn-header" form="form">
+      <span class="submit-btn-txt-header">
+        Submit
+      </span>
+    </button>
+  </div>
+  <span class="ScreenTypeStyle">
+    Screen/Type/Style
+  </span>
+  <div class="content">
+    <div class="input-container">
+      <form [formGroup]="form" id="form" name="form" (ngSubmit)="submitStyles()">
+        <div class="auth-container">
+          <div class="auth-header">
+            <span class="auth-header-txt">
+              OAuth
+            </span>
+          </div>
+          <div class="row">
+            <span class="status-label">
+              Status:
+            </span>
+            <div class="status-container" id="statusbg">
+              <div class="LED" id="statusLED"></div>
+              <span class="status-txt">
+                {{status}}
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <span class="token-label">
+              Token:
+            </span>
+            <input #auth type="text" class="token-input" id="auth" placeholder="Please enter token" (blur)="isAuthDisabled(auth?.value, url?.value)">
+            <span class="URL-label">
+              URL:
+            </span>
+            <input #url type="text" class="URL-input" id="url" placeholder="Please enter URL" (blur)="isAuthDisabled(auth?.value, url?.value)">
+          </div>
+          <button type="submit" class="auth-btn" id="authbtn"   [class.auth-btn-disabled] = "authbtnDisabled" (click)="authenticate()">
+            <span class="auth-btn-txt">
+              Auth
+            </span>
+          </button>
+        </div>
+        <div class="setting-container">
+          <div class="setting-header">
+            <span class="setting-header-txt">
+              General Settings
+            </span>
+          </div>
+          <div class="row">
+            <span class="UID-label">
+              User ID:
+            </span>
+            <input type="text" class="UID-input" formControlName="user_id" placeholder="Please enter user ID">
+            <span class="SID-label">
+              Screen ID:
+            </span>
+            <input type="text" class="SID-input" formControlName="screen_id" placeholder="Please enter screen ID">
+          </div>
+          <div class="row">
+            <span class="echo-label">
+              Echo:
+            </span>
+            <input type="checkbox" class="echo-cb" (click)="echoToggle()">
+          </div>
+        </div>
+        <div class="cell-container">
+          <div class="cell-header">
+            <span class="cell-header-txt">
+              Cell Settings
+            </span>
+          </div>
+          <div class="row">
+            <span class="API-label">
+              API ID:
+            </span>
+            <input type="number" class="API-input" min="0" formControlName="api_id" placeholder="Please enter API ID">
+            <span class="CID-label">
+              Cell ID:
+            </span>
+            <input type="text" class="CID-input" formControlName="cell_id" placeholder="Please enter cell ID">
+          </div>
+          <div class="row">
+            <span class="CB-label">
+              Callback:
+            </span>
+            <input type="text" class="CB-input" formControlName="button_callback" placeholder="Please enter callback">
+            <span class="type-label">
+              Type:
+            </span>
+            <input type="text" class="type-input" formControlName="button_type" placeholder="Please enter type">
+          </div>
+          <div class="row">
+            <span class="style-label">
+              Style:
+            </span>
+            <input type="text" class="style-input" formControlName="Button_style" placeholder="Please enter style">
+            <span class="span-label">
+              Span:
+            </span>
+            <input type="number" class="span-input" formControlName="button_span" placeholder="Please enter span">
+          </div>
+          <div class="row">
+            <span class="BG-color-label">
+              BG Color:
+            </span>
+            <div class="BG-color-outer-border">
+              <div class="BG-color-inner-border">
+                <input
+                  [(colorPicker)]="colorBG"
+                  [style.background]="colorBG"
+                  [cpOKButton]="true"
+                  [cpSaveClickOutside]="false"
+                  [cpPosition]="'bottom'"
+                  [style.color]="colorBG"
+                  [cpOutputFormat]="'hex'"
+                  type="button"
+                  formControlName="button_bgcolor"
+                />
+              </div>
+            </div>
+            <span class="icon-label">
+              Icon:
+            </span>
+            <div
+            class="btn-group"
+            dropdown
+            [isDisabled]="disabled"
+            #dropdown="bs-dropdown"
+            [autoClose]="autoClose"
+            (mouseleave)="autoCloseDisplay()"
+            >
+              <button type="button" class="btn btn-svg">
+                <svg class="svg-icon icon-icon2">
+                  <use
+                    *ngIf="iconList === 'Android'"
+                    attr.xlink:href="./assets/app-icons.svg#{{ svgPath?.name }}"
+                  ></use>
+                  <use
+                    *ngIf="iconList === 'IOS'"
+                    attr.xlink:href="./assets/app-ios-icons.svg#{{ svgPath?.name }}"
+                  ></use>
+                  <use
+                    *ngIf="iconList === 'postFooter'"
+                    attr.xlink:href="./assets/app-features-icons.svg#{{ svgPath?.name }}"
+                  ></use>
+                  <use
+                    *ngIf="iconList === 'markers'"
+                    attr.xlink:href="./assets/app-markers-icons.svg#{{ svgPath?.name }}"
+                  ></use>
+                </svg>
+              </button>
+              <button
+                id="button-split"
+                type="button"
+                dropdownToggle
+                class="btn btn-svg dropdown-toggle dropdown-toggle-split"
+                aria-controls="dropdown-split"
+              >
+                <span class="caret"></span>
+
+              </button>
+
+              <ul
+                id="dropdown-split"
+                *dropdownMenu
+                class="dropdown-menu"
+                role="menu"
+                aria-labelledby="button-split"
+              >
+                <div *ngIf="iconList === 'Android'">
+                  <div class="icon-seactions" (click)="dropdown.show()">
+                    <div
+                      class="seaction"
+                      (click)="selectIconSeaction('firstSeaction')"
+                      [ngStyle]="iconFirstTabStyle"
+                    >
+                      General
+                    </div>
+                    <div
+                      class="sec-seaction"
+                      (click)="selectIconSeaction('secSeaction')"
+                      [ngStyle]="iconSecTabStyle"
+                    >
+                      Action
+                    </div>
+                    <div
+                      class="seaction"
+                      (click)="selectIconSeaction('thirdSeaction')"
+                      [ngStyle]="iconThirdTabStyle"
+                    >
+                      Social
+                    </div>
+                  </div>
+                  <div class="icon-container" (click)="dropdown.hide()">
+                    <li
+                      class="icon-element"
+                      *ngFor="let name of iconNames"
+                      role="menuitem"
+                      aria-labelledby="button-split"
+                      (click)="updateItemIconEvent(name)"
+                    >
+                      <svg class="svg-icon icon-icon">
+                        <use attr.xlink:href="./assets/app-icons.svg#{{ name }}"></use>
+                      </svg>
+                    </li>
+                  </div>
+                </div>
+                <div *ngIf="iconList === 'IOS'">
+                  <div class="icon-container" (click)="dropdown.hide()">
+                    <li
+                      class="icon-element"
+                      *ngFor="let name of iosNames"
+                      role="menuitem"
+                      aria-labelledby="button-split"
+                      (click)="updateItemIconEvent(name)"
+                    >
+                      <svg class="svg-icon icon-icon">
+                        <use
+                          attr.xlink:href= "./assets/app-ios-icons.svg#{{ name }}"
+                        ></use>
+                      </svg>
+                    </li>
+                  </div>
+                </div>
+                <div *ngIf="iconList === 'postFooter'">
+                  <div class="icon-container" (click)="dropdown.hide()">
+                    <li
+                      class="icon-element"
+                      *ngFor="let name of postFooterName"
+                      role="menuitem"
+                      aria-labelledby="button-split"
+                      (click)="updateItemIconEvent(name)"
+                    >
+                      <svg class="svg-icon icon-icon">
+                        <use
+                          attr.xlink:href="./assets/app-features-icons.svg#{{ name }}"
+                        ></use>
+                      </svg>
+                    </li>
+                  </div>
+                </div>
+                <div *ngIf="iconList === 'markers'">
+                  <div class="icon-container" (click)="dropdown.hide()">
+                    <li
+                      class="icon-element"
+                      *ngFor="let name of locationIconNames"
+                      role="menuitem"
+                      aria-labelledby="button-split"
+                      (click)="updateItemIconEvent(name)"
+                    >
+                      <svg class="svg-icon icon-icon">
+                        <use
+                          attr.xlink:href="./assets/app-markers-icons.svg#{{ name }}"
+                        ></use>
+                      </svg>
+                    </li>
+                  </div>
+                </div>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <span class="icon-color-label">
+              Icon Color:
+            </span>
+            <div class="icon-color-outer-border">
+              <div class="icon-color-inner-border">
+                <input
+                  [(colorPicker)]="colorIcon"
+                  [style.background]="colorIcon"
+                  [cpOKButton]="true"
+                  [cpSaveClickOutside]="false"
+                  [cpPosition]="'bottom'"
+                  [style.color]="colorIcon"
+                  [cpOutputFormat]="'hex'"
+                  type="button"
+                  formControlName="button_icon_bgcolor"
+                />
+              </div>
+            </div>
+            <span class="label-label">
+              Label:
+            </span>
+            <input type="text" class="label-input" formControlName="button_label" placeholder="Please enter label">
+          </div>
+          <div class="row">
+            <span class="txt-color-label">
+              Text Color:
+            </span>
+            <div class="txt-color-outer-border">
+              <div class="txt-color-inner-border">
+                <input
+                  [(colorPicker)]="colorTxt"
+                  [style.background]="colorTxt"
+                  [cpOKButton]="true"
+                  [cpSaveClickOutside]="false"
+                  [cpPosition]="'bottom'"
+                  [style.color]="colorTxt"
+                  [cpOutputFormat]="'hex'"
+                  type="button"
+                  formControlName="button_textcolor"
+                />
+              </div>
+            </div>
+            <span class="sub-label-label">
+              Sub Label:
+            </span>
+            <input type="text" class="sub-label-input" formControlName="button_sub-label" placeholder="Please enter label">
+          </div>
+          <div class="row">
+            <span class="hint-label">
+              Hint:
+            </span>
+            <input type="text" class="hint-input" formControlName="button_hint" placeholder="Please enter hint">
+            <span class="kb-label">
+              Keyboard:
+            </span>
+            <input type="text" class="kb-input" formControlName="button_keyboard" placeholder="Please enter keyboard">
+          </div>
+          <div class="row">
+            <span class="value-label">
+              Value:
+            </span>
+            <input type="text" class="value-input" formControlName="button_value" placeholder="Please enter value">
+            <span class="DB-label">
+              DB:
+            </span>
+            <input type="radio" id="DB-true-cb" class="DB-true-cb" formControlName="Button_db" value="1">
+            <span class="DB-true-label">
+              True
+            </span>
+            <input type="radio" class="DB-false-cb" formControlName="Button_db" value="0">
+            <span class="DB-false-label">
+              False
+            </span>
+          </div>
+        </div>
+        <div class="action-container">
+          <div class="action-header">
+            <span class="action-header-txt">
+              Actions
+            </span>
+          </div>
+          <div class="row">
+            <span class="AURL-label">
+              URL:
+            </span>
+            <input type="text" class="AURL-input" formControlName="button_url" placeholder="Please enter URL">
+            <span class="NM-label">
+              Next Menu:
+            </span>
+            <input type="text" class="NM-input" formControlName="next_menu" placeholder="Add next menu">
+          </div>
+        </div>
+        <div class="optional-container">
+          <div class="optional-header">
+            <span class="optional-header-txt">
+              Optional
+            </span>
+          </div>
+          <div class="row">
+            <span class="query-label">
+              Query:
+            </span>
+            <input type="text" class="query-input" formControlName="button_query" placeholder="Please enter query">
+            <span class="ft-label">
+              From Type:
+            </span>
+            <input type="text" class="ft-input" formControlName="Button-form_type" placeholder="Please enter from type">
+          </div>
+          <div class="row">
+            <span class="order-label">
+              Order:
+            </span>
+            <input type="number" class="order-input" formControlName="button_order" placeholder="Please enter order">
+            <span class="format-label">
+              Format:
+            </span>
+            <input type="text" class="format-input" formControlName="button_format" placeholder="Please enter format">
+          </div>
+          <div class="row">
+            <span class="age-label">
+              Age Verify:
+            </span>
+            <input type="number" class="age-input" min="0" formControlName="button_age_verification" placeholder="Please enter age">
+            <span class="list-label">
+              List Option:
+            </span>
+            <input type="text" class="list-input" formControlName="button_list_option" placeholder="Please enter list option">
+          </div>
+          <div class="row">
+            <span class="sel-label">
+              Selection:
+            </span>
+            <input type="text" class="sel-input" formControlName="button_list_option_selection" placeholder="Please enter selection">
+            <span class="min-value-label">
+              Min Value:
+            </span>
+            <input type="number" class="min-value-input" formControlName="button_min_value" placeholder="Please enter min value">
+          </div>
+          <div class="row">
+            <span class="max-value-label">
+              Max Value:
+            </span>
+            <input type="number" class="max-value-input" formControlName="button_max_value" placeholder="Please enter max value">
+            <span class="step-value-label">
+              Step Value:
+            </span>
+            <input type="number" class="step-value-input" formControlName="button_step_value" placeholder="Please enter step value">
+          </div>
+          <div class="row" #daterow>
+            <span class="start-date-label">
+              Start Date:
+            </span>
+            <!-- <input
+                class="date-input"
+                type="text"
+                date-date-format="YYYY / MM / DD"
+                #minDate="bsDatepicker"
+                bsDatepicker
+                [placement]="'top'"
+                [container]="'div#daterow'"
+                [value]="container?.min | date: 'YYYY MM DD'"
+                (bsValueChange)="updateMinDate($event)"
+              > -->
+
+
+            <input type="date" class="start-date-input" formControlName="button_start_date">
+            <span class="end-date-label">
+              End Date:
+            </span>
+            <input type="date" class="end-date-input" formControlName="button_end_date">
+          </div>
+          <div class="row">
+            <span class="past-date-label">
+              Past Date:
+            </span>
+            <input type="radio" class="past-date-true-cb" formControlName="button_past_date" value="1">
+            <span class="past-date-true-label">
+              True
+            </span>
+            <input type="radio" class="past-date-false-cb" formControlName="button_past_date" value="0">
+            <span class="past-date-false-label">
+              False
+            </span>
+            <span class="future-date-label">
+              Future Date:
+            </span>
+            <input type="radio" class="future-date-true-cb" formControlName="button_future_date" value="1">
+            <span class="future-date-true-label">
+              True
+            </span>
+            <input type="radio" class="future-date-false-cb" formControlName="button_future_date" value="0">
+            <span class="future-date-false-label">
+              False
+            </span>
+          </div>
+        </div>
+        <div class="footer">
+          <button type="reset" class="clear-btn" form="form" (click)="clearReply()">
+            <span class="clear-btn-txt">
+              Clear
+            </span>
+          </button>
+          <button type="submit" class="submit-btn" form="form">
+            <span class="submit-btn-txt">
+              Submit
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  <div class="reply-container">
+    <div class="reply-header">
+      <div class="reply-header-txt">
+        Response Message
+      </div>
+    </div>
+    <textarea class="txtarea">
+      {{serverReply}}
+    </textarea>
+  </div>
+</div>
+
+<!-- <div class="menu">
   <div class="menuMain" (click)="showHide()">
     File
   </div>
@@ -109,7 +621,6 @@
               </ng-template>
 
             </div>
-            <!----------------------------------------------------------------------------------------------------------------------------------->
             <div class="styleContainer">
               <div class="labelBox">
                 <label>Icons: </label>
@@ -251,7 +762,6 @@
                 </ul>
               </div>
             </div>
-<!----------------------------------------------------------------------------------------------------------------------------------->
           </div>
         </form>
       </div>
@@ -263,4 +773,4 @@
         {{serverReply}}
       </textarea>
   </div>
-</div>
+</div>  -->

@@ -1,0 +1,33 @@
+:host{
+  body{
+    margin: unset !important;
+  }
+
+  .bs-datepicker-head {
+    background-color: none !important;
+    background-image: linear-gradient(101deg, #625EB1 3%, #20ADEC) !important;
+  }
+  .bs-datepicker-head,
+  .bs-datepicker-body {
+    width: 215px !important;
+    max-width: 235px !important;
+    min-width: 0 !important;
+    max-height: 218px !important;
+    min-height: 0 !important;
+  }
+  .bs-datepicker-body {
+    table.days span {
+      width: 25px !important;
+      height: 25px !important;
+      line-height: 25px !important;
+    }
+  }
+  .bs-datepicker-body table td span.pre-selected {
+    color: #FFFFFF !important;
+    background-color: #5370BE !important;
+  }
+  .bs-datepicker-body table td span.selected {
+    background-color: #5370BE !important;
+  }
+
+}

@@ -17,13 +17,18 @@ export class AppComponent implements OnInit, OnChanges{
   btnjson: any = [];
   url: any = "wss://d1.nandbox.net:5020/nandbox/api/";
   serverReply = "";
-  status = "DISCONNECTED";
+  status = "Disconnected";
   buttonData: any;
   serverReplyData: any;
   ws: any;
   userID: any;
   screenID: any;
   echo = false;
+  container: any;
+  authbtnDisabled = true;
+  colorBG = "#362f2f";
+  colorTxt = "#ffffff";
+  colorIcon = "#38b3df";
   btnStyles = [
     {
       field: "button_callback",
@@ -92,6 +97,13 @@ export class AppComponent implements OnInit, OnChanges{
       field: "api_id",
       name: "API ID",
       type: "Number",
+      required: false,
+      value: null
+    },
+    {
+      field: "cell_id",
+      name: "Cell ID",
+      type: "String",
       required: false,
       value: null
     },
@@ -244,12 +256,13 @@ export class AppComponent implements OnInit, OnChanges{
     "next_menu": new FormControl(),
     "button_span": new FormControl(),
     "button_order": new FormControl(),
-    "button_textcolor": new FormControl(),
-    "button_bgcolor": new FormControl(),
+    "button_textcolor": new FormControl("#ffffff"),
+    "button_bgcolor": new FormControl("#362f2f"),
     "button_label": new FormControl(),
     "button_url": new FormControl(),
     "button_query": new FormControl(),
     "api_id": new FormControl(),
+    "cell_id": new FormControl(),
     "button_type": new FormControl(null,Validators.required),
     "button_keyboard": new FormControl(),
     "Button-form_type": new FormControl(null,Validators.required),
@@ -269,7 +282,7 @@ export class AppComponent implements OnInit, OnChanges{
     "button_min_value": new FormControl(),
     "button_max_value": new FormControl(),
     "button_step_value": new FormControl(),
-    "button_icon_bgcolor": new FormControl()
+    "button_icon_bgcolor": new FormControl("#38b3df")
   });
 
   constructor(private ref: ChangeDetectorRef, private fb: FormBuilder){
@@ -278,7 +291,13 @@ export class AppComponent implements OnInit, OnChanges{
         this.required.push(btn.field);
       }
     });
+    // window.addEventListener('click', function(e: any){
+    //   if (!document.getElementById('fileDM')!.contains(e.target) && (!document.getElementById('logo-menu')!.contains(e.target))){
+    //    document.getElementById('l2')!.style.height="0px"; //the same code you've used to hide the menu
+    //   }
+    // });
   }
+
   submitStyles(){
     console.log("Submit");
     let fulfilled = true;
@@ -341,7 +360,7 @@ export class AppComponent implements OnInit, OnChanges{
         "method": "sendCellMessage",
         "user_id": this.userID,
         "screen_id": this.screenID,
-        "cell_id": "",
+        "cell_id": this.form.controls["cell_id"].value,
         "text": this.btnjson,
         "reference": 123456789
       }
@@ -421,8 +440,16 @@ export class AppComponent implements OnInit, OnChanges{
   showHide(){
     if (this.menuVis == false){
       this.menuVis = true;
+      let filebtn = document.getElementById("filebtn");
+      let filetxt = document.getElementById("filetxt");
+      filebtn!.style.borderColor = "#26b2f6";
+      filetxt!.style.color = "#26b2f6";
     } else {
       this.menuVis = false;
+      let filebtn = document.getElementById("filebtn");
+      let filetxt = document.getElementById("filetxt");
+      filebtn!.style.borderColor = "#dfe5ea";
+      filetxt!.style.color = "#172b4d";
     }
   }
   menuVisible(){
@@ -484,6 +511,7 @@ export class AppComponent implements OnInit, OnChanges{
   }
 
   authenticate(){
+    if(!this.authbtnDisabled){
     let tokenInput: any = document.getElementById('auth');
     let token = tokenInput.value;
     let urlInput: any = document.getElementById('url');
@@ -492,6 +520,15 @@ export class AppComponent implements OnInit, OnChanges{
     let authenticatetxt = JSON.stringify({ "token": token, "rem": true, "method": "TOKEN_AUTH" });
 
     this.sendRequest(authenticatetxt);
+    }
+  }
+
+  isAuthDisabled(tokenInput: any, urlInput: any){
+    if(tokenInput && urlInput){
+      this.authbtnDisabled = false;
+    } else {
+      this.authbtnDisabled = true;
+    }
   }
 
   web(data: any){
@@ -502,7 +539,11 @@ export class AppComponent implements OnInit, OnChanges{
       console.log("url: " + this.url);
       this.ws = new WebSocket(this.url);
       this.ws.addEventListener('open', (evt: any) => {
-        this.status = "CONNECTED";
+        this.status = "Connected";
+        let statusbg = document.getElementById("statusbg");
+        let statusLED = document.getElementById("statusLED");
+        statusbg!.style.backgroundColor = "#eafbef";
+        statusLED!.style.backgroundColor = "#14cf57";
         this.sendTheRequest(data);
       });
       this.ws.addEventListener('message', (evt: any) => {
@@ -518,7 +559,11 @@ export class AppComponent implements OnInit, OnChanges{
         }
       });
       this.ws.addEventListener('close', (evt: any) => {
-        this.status = "DISCONNECTED";
+        this.status = "Disconnected";
+        let statusbg = document.getElementById("statusbg");
+        let statusLED = document.getElementById("statusLED");
+        statusbg!.style.backgroundColor = "#ffedec";
+        statusLED!.style.backgroundColor = "#ff3b30";
       });
     }
     else {
@@ -552,7 +597,7 @@ export class AppComponent implements OnInit, OnChanges{
     IOS: 'IOS'
   }
   @Input() disabled = false;
-  svgPath: any = null;
+  svgPath: any =     {  name: "ic_assignment_24dp" };;
   postFooterName = [
     'ic_comment',
     'ic_comment_box',
@@ -1122,6 +1167,9 @@ export class AppComponent implements OnInit, OnChanges{
     return;
   }
 
+  updateMinDate(e: any){
+    this.container = e;
+  }
 
 
 }
