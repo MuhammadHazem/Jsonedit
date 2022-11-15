@@ -9,7 +9,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 })
 
 export class AppComponent implements OnInit, OnChanges{
-  title = 'jsonedit';
+  title = 'Workflow Cell Test';
   required: any = [];
   menuVis = false;
   file: any;
