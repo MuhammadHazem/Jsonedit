@@ -317,7 +317,7 @@ export class AppComponent implements OnInit, OnChanges{
     });
     if(fulfilled){
       let file = this.makeFile([]);
-      this.sendRequest(file)
+      this.sendTheRequest(file);
     }else{
       window.alert("Inputs required");
     }
@@ -333,7 +333,7 @@ export class AppComponent implements OnInit, OnChanges{
           btn.value = this.form.get(key)?.value;
         }
         if(key == "user_id"){
-          this.userID = String(this.form.get(key)?.value);
+          this.userID = this.form.get(key)?.value;
         }
         if(key == "screen_id"){
           this.screenID = this.form.get(key)?.value
@@ -354,15 +354,14 @@ export class AppComponent implements OnInit, OnChanges{
     this.btnjson = data;
     this.btnjson.push(btnData);
     this.btnjson = JSON.stringify(this.btnjson);
-    console.log(this.btnjson);
     let file = JSON.stringify(
       {
-        "method": "sendCellMessage",
-        "user_id": this.userID,
-        "screen_id": this.screenID,
-        "cell_id": this.form.controls["cell_id"].value,
-        "text": this.btnjson,
-        "reference": 123456789
+        method: "sendCellMessage",
+        user_id: this.userID,
+        screen_id: this.screenID,
+        cell_id: this.form.controls["cell_id"].value,
+        text: this.btnjson,
+        reference: 123456789
       }
     )
     return file;
@@ -512,14 +511,14 @@ export class AppComponent implements OnInit, OnChanges{
 
   authenticate(){
     if(!this.authbtnDisabled){
-    let tokenInput: any = document.getElementById('auth');
-    let token = tokenInput.value;
-    let urlInput: any = document.getElementById('url');
-    this.url = urlInput.value;
+      let tokenInput: any = document.getElementById('auth');
+      let token = tokenInput.value;
+      let urlInput: any = document.getElementById('url');
+      this.url = urlInput.value;
 
-    let authenticatetxt = JSON.stringify({ "token": token, "rem": true, "method": "TOKEN_AUTH" });
+      let authenticatetxt = JSON.stringify({ "token": token, "rem": true, "method": "TOKEN_AUTH" });
 
-    this.sendRequest(authenticatetxt);
+      this.sendRequest(authenticatetxt);
     }
   }
 
@@ -544,10 +543,14 @@ export class AppComponent implements OnInit, OnChanges{
         let statusLED = document.getElementById("statusLED");
         statusbg!.style.backgroundColor = "#eafbef";
         statusLED!.style.backgroundColor = "#14cf57";
+        this.ref.detectChanges();
+        console.log("opened");
         this.sendTheRequest(data);
       });
       this.ws.addEventListener('message', (evt: any) => {
-        this.serverReply += "\n" + evt.data;
+        this.serverReply += "\n" + evt.data + "\n";
+        this.ref.detectChanges();
+        console.log(this.echo);
         if(JSON.parse(evt.data).method === "chatMenuCallback" && this.echo == true){
           let user_ID = JSON.parse(evt.data).chatMenuCallback.chat.id;
           let screen_ID = JSON.parse(evt.data).chatMenuCallback.menu_ref;
@@ -566,13 +569,10 @@ export class AppComponent implements OnInit, OnChanges{
         statusLED!.style.backgroundColor = "#ff3b30";
       });
     }
-    else {
-      this.sendTheRequest(data);
-    }
   }
 
-  sendTheRequest(data: any) {
-    console.log("sending request" + data);
+  sendTheRequest(data: string) {
+    console.log("sending request " + data);
     if (!this.ws || this.ws.readyState != WebSocket.OPEN){
       throw "WebSocket not open";
     }
@@ -584,11 +584,7 @@ export class AppComponent implements OnInit, OnChanges{
   }
 
   echoToggle(){
-    if(this.echo == false){
-      this.echo = true;
-    } else {
-      this.echo = false;
-    }
+    this.echo = !this.echo;
     console.log(this.echo);
   }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

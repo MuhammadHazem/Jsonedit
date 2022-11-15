@@ -62,7 +62,7 @@
             </span>
             <input #url type="text" class="URL-input" id="url" placeholder="Please enter URL" (blur)="isAuthDisabled(auth?.value, url?.value)">
           </div>
-          <button type="submit" class="auth-btn" id="authbtn"   [class.auth-btn-disabled] = "authbtnDisabled" (click)="authenticate()">
+          <button type="button" class="auth-btn" id="authbtn"   [class.auth-btn-disabled] = "authbtnDisabled" (click)="authenticate()">
             <span class="auth-btn-txt">
               Auth
             </span>
