@@ -300,27 +300,27 @@ export class AppComponent implements OnInit, OnChanges{
 
   submitStyles(){
     console.log("Submit");
-    let fulfilled = true;
-    Object.keys(this.form.controls).forEach(key => {
-      if(this.form.get(key)?.value == null && this.required.includes(key)){
+    // let fulfilled = true;
+    // Object.keys(this.form.controls).forEach(key => {
+    //   if(this.form.get(key)?.value == null && this.required.includes(key)){
         // let index = this.btnStyles.map(btn => btn.field).indexOf(key);
         // let input = document.getElementById("styleInput_"+index);
         // input!.style.borderColor = "red";
         // fulfilled = false;
-      }else{
+      // }else{
         // let index = this.btnStyles.map(btn => btn.field).indexOf(key);
         // console.log(index)
         // let input = document.getElementById("styleInput_"+index);
         // input!.style.borderColor = "";
         // this.ref.detectChanges();
-      }
-    });
-    if(fulfilled){
+      // }
+    // });
+    // if(fulfilled){
       let file = this.makeFile([]);
       this.sendTheRequest(file);
-    }else{
-      window.alert("Inputs required");
-    }
+    // }else{
+      // window.alert("Inputs required");
+    // }
   }
 
   makeFile(data: any){
