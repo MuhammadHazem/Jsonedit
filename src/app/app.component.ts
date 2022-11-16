@@ -23,6 +23,7 @@ export class AppComponent implements OnInit, OnChanges{
   ws: any;
   userID: any;
   screenID: any;
+  appID: any;
   echo = false;
   container: any;
   authbtnDisabled = true;
@@ -90,13 +91,6 @@ export class AppComponent implements OnInit, OnChanges{
       field: "button_query",
       name: "Query",
       type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "api_id",
-      name: "API ID",
-      type: "Number",
       required: false,
       value: null
     },
@@ -256,12 +250,12 @@ export class AppComponent implements OnInit, OnChanges{
     "next_menu": new FormControl(),
     "button_span": new FormControl(),
     "button_order": new FormControl(),
-    "button_textcolor": new FormControl("#ffffff"),
-    "button_bgcolor": new FormControl("#362f2f"),
+    "button_textcolor": new FormControl(),
+    "button_bgcolor": new FormControl(),
     "button_label": new FormControl(),
     "button_url": new FormControl(),
     "button_query": new FormControl(),
-    "api_id": new FormControl(),
+    "app_id": new FormControl(),
     "cell_id": new FormControl(),
     "button_type": new FormControl(null,Validators.required),
     "button_keyboard": new FormControl(),
@@ -282,7 +276,7 @@ export class AppComponent implements OnInit, OnChanges{
     "button_min_value": new FormControl(),
     "button_max_value": new FormControl(),
     "button_step_value": new FormControl(),
-    "button_icon_bgcolor": new FormControl("#38b3df")
+    "button_icon_bgcolor": new FormControl()
   });
 
   constructor(private ref: ChangeDetectorRef, private fb: FormBuilder){
@@ -336,7 +330,10 @@ export class AppComponent implements OnInit, OnChanges{
           this.userID = this.form.get(key)?.value;
         }
         if(key == "screen_id"){
-          this.screenID = this.form.get(key)?.value
+          this.screenID = this.form.get(key)?.value;
+        }
+        if(key == "app_id"){
+          this.appID = this.form.get(key)?.value;
         }
       });
     });
@@ -346,11 +343,11 @@ export class AppComponent implements OnInit, OnChanges{
       if(value == ''){
         value = null;
       }
-      if(value != null){
+      if(value != null && key != "user_id" && key != "app_id" && key != "screen_id"){
         btnData[key] = value;
       }
     });
-    btnData["button_icon"] = this.svgPath;
+    btnData["button_icon"] = this.svgPath.name;
     this.btnjson = data;
     this.btnjson.push(btnData);
     this.btnjson = JSON.stringify(this.btnjson);
@@ -360,11 +357,27 @@ export class AppComponent implements OnInit, OnChanges{
         user_id: this.userID,
         screen_id: this.screenID,
         cell_id: this.form.controls["cell_id"].value,
+        app_id: this.appID,
         text: this.btnjson,
         reference: 123456789
       }
     )
     return file;
+  }
+
+  onChangeTxtColor(e: any){
+    this.colorTxt = e;
+    this.form.setControl("button_textcolor", this.fb.control(e, Validators.required));
+  }
+
+  onChangeBgColor(e: any){
+    this.colorBG = e;
+    this.form.setControl("button_bgcolor", this.fb.control(e, Validators.required));
+  }
+
+  onChangeIconBgColor(e: any){
+    this.colorIcon = e;
+    this.form.setControl("button_icon_bgcolor", this.fb.control(e, Validators.required));
   }
 
   download(saveLocation: any){
@@ -379,6 +392,9 @@ export class AppComponent implements OnInit, OnChanges{
         }
         if(key == "screen_id"){
           this.screenID = this.form.get(key)?.value
+        }
+        if(key == "app_id"){
+          this.appID = this.form.get(key)?.value
         }
       });
     });
@@ -404,7 +420,14 @@ export class AppComponent implements OnInit, OnChanges{
         type: "SVG Path",
         required: false,
         value: this.svgPath
-      }
+      },
+      {
+        field: "app_id",
+        name: "APP ID",
+        type: "Number",
+        required: true,
+        value: this.appID
+      },
     );
     let file = new Blob([JSON.stringify(downloadArray)], {type: 'text/plain'});
 
@@ -554,11 +577,15 @@ export class AppComponent implements OnInit, OnChanges{
         if(JSON.parse(evt.data).method === "chatMenuCallback" && this.echo == true){
           let user_ID = JSON.parse(evt.data).chatMenuCallback.chat.id;
           let screen_ID = JSON.parse(evt.data).chatMenuCallback.menu_ref;
+          let app_id = JSON.parse(evt.data).chatMenuCallback.app_id;
           this.form.setControl("user_id", this.fb.control(user_ID, Validators.required));
           this.form.setControl("screen_id", this.fb.control(screen_ID, Validators.required));
+          this.form.setControl("app_id", this.fb.control(app_id, Validators.required));
           let btnData = JSON.parse(evt.data).chatMenuCallback.button_data;
           console.log(btnData);
-          this.sendTheRequest(this.makeFile(btnData));
+          if(this.form.get("cell_id")?.value != null){
+            this.sendTheRequest(this.makeFile(btnData));
+          }
         }
       });
       this.ws.addEventListener('close', (evt: any) => {

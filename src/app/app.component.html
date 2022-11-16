@@ -98,10 +98,10 @@
             </span>
           </div>
           <div class="row">
-            <span class="API-label">
-              API ID:
+            <span class="APP-label">
+              APP ID:
             </span>
-            <input type="number" class="API-input" min="0" formControlName="api_id" placeholder="Please enter API ID">
+            <input type="number" class="APP-input" min="0" formControlName="app_id" placeholder="Please enter APP ID">
             <span class="CID-label">
               Cell ID:
             </span>
@@ -143,6 +143,7 @@
                   [cpOutputFormat]="'hex'"
                   type="button"
                   formControlName="button_bgcolor"
+                  (colorPickerChange)="onChangeBgColor($event)"
                 />
               </div>
             </div>
@@ -303,6 +304,7 @@
                   [cpOutputFormat]="'hex'"
                   type="button"
                   formControlName="button_icon_bgcolor"
+                  (colorPickerChange)="onChangeIconBgColor($event)"
                 />
               </div>
             </div>
@@ -327,6 +329,7 @@
                   [cpOutputFormat]="'hex'"
                   type="button"
                   formControlName="button_textcolor"
+                  (colorPickerChange)="onChangeTxtColor($event)"
                 />
               </div>
             </div>
