@@ -327,13 +327,13 @@ export class AppComponent implements OnInit, OnChanges{
           btn.value = this.form.get(key)?.value;
         }
         if(key == "user_id"){
-          this.userID = this.form.get(key)?.value;
+          this.userID = String(this.form.get(key)?.value);
         }
         if(key == "screen_id"){
           this.screenID = this.form.get(key)?.value;
         }
         if(key == "app_id"){
-          this.appID = this.form.get(key)?.value;
+          this.appID = String(this.form.get(key)?.value);
         }
       });
     });
@@ -354,10 +354,10 @@ export class AppComponent implements OnInit, OnChanges{
     let file = JSON.stringify(
       {
         method: "sendCellMessage",
-        user_id: this.userID,
+        user_id: String(this.userID),
         screen_id: this.screenID,
         cell_id: this.form.controls["cell_id"].value,
-        app_id: this.appID,
+        app_id: String(this.appID),
         text: this.btnjson,
         reference: 123456789
       }
@@ -388,13 +388,13 @@ export class AppComponent implements OnInit, OnChanges{
           btn.value = this.form.get(key)?.value;
         }
         if(key == "user_id"){
-          this.userID = this.form.get(key)?.value
+          this.userID = String(this.form.get(key)?.value)
         }
         if(key == "screen_id"){
           this.screenID = this.form.get(key)?.value
         }
         if(key == "app_id"){
-          this.appID = this.form.get(key)?.value
+          this.appID = String(this.form.get(key)?.value)
         }
       });
     });
