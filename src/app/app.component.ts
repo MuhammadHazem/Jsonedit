@@ -244,7 +244,7 @@ export class AppComponent implements OnInit, OnChanges{
   ]
 
   form = this.fb.group({
-    "user_id": new FormControl(null,Validators.required),
+    "user_id": new FormControl("",Validators.required),
     "screen_id": new FormControl(null,Validators.required),
     "button_callback": new FormControl(null,Validators.required),
     "next_menu": new FormControl(),
@@ -575,9 +575,9 @@ export class AppComponent implements OnInit, OnChanges{
         this.ref.detectChanges();
         console.log(this.echo);
         if(JSON.parse(evt.data).method === "chatMenuCallback" && this.echo == true){
-          let user_ID = JSON.parse(evt.data).chatMenuCallback.chat.id;
+          let user_ID = String(JSON.parse(evt.data).chatMenuCallback.chat.id);
           let screen_ID = JSON.parse(evt.data).chatMenuCallback.menu_ref;
-          let app_id = JSON.parse(evt.data).chatMenuCallback.app_id;
+          let app_id = String(JSON.parse(evt.data).chatMenuCallback.app_id);
           this.form.setControl("user_id", this.fb.control(user_ID, Validators.required));
           this.form.setControl("screen_id", this.fb.control(screen_ID, Validators.required));
           this.form.setControl("app_id", this.fb.control(app_id, Validators.required));
