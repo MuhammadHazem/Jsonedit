@@ -116,21 +116,21 @@ export class AppComponent implements OnInit, OnChanges{
       value: null
     },
     {
-      field: "Button-form_type",
+      field: "button-form_type",
       name: "Button-Form Type",
       type: "String",
       required: true,
       value: null
     },
     {
-      field: "Button_style",
+      field: "button_style",
       name: "Style",
       type: "String",
       required: true,
       value: null
     },
     {
-      field: "Button_db",
+      field: "button_db",
       name: "Button db",
       type: "Radio",
       required: true,
@@ -259,9 +259,9 @@ export class AppComponent implements OnInit, OnChanges{
     "cell_id": new FormControl(),
     "button_type": new FormControl(null,Validators.required),
     "button_keyboard": new FormControl(),
-    "Button-form_type": new FormControl(null,Validators.required),
-    "Button_style": new FormControl(null,Validators.required),
-    "Button_db": new FormControl(null,Validators.required),
+    "button-form_type": new FormControl(null,Validators.required),
+    "button_style": new FormControl(null,Validators.required),
+    "button_db": new FormControl(null,Validators.required),
     "button_value": new FormControl(),
     "button_hint": new FormControl(),
     "button_sub-label": new FormControl(),
