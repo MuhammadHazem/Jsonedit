@@ -151,7 +151,7 @@ export class AppComponent implements OnInit, OnChanges{
       value: null
     },
     {
-      field: "button_sub-label",
+      field: "button_sub_label",
       name: "Sub-Label",
       type: "String",
       required: false,
@@ -264,7 +264,7 @@ export class AppComponent implements OnInit, OnChanges{
     "button_db": new FormControl(null,Validators.required),
     "button_value": new FormControl(),
     "button_hint": new FormControl(),
-    "button_sub-label": new FormControl(),
+    "button_sub_label": new FormControl(),
     "button_format": new FormControl(),
     "button_start_date": new FormControl(),
     "button_end_date": new FormControl(),
