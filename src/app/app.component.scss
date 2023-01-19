@@ -380,7 +380,7 @@ img.Logo-Copy-3 {
   color: #bec2d4;
 }
 
-.echo-label{
+.autoFill-label{
   width: 44px;
   margin: 22px 0 0 12px;
   font-family: Roboto;
@@ -389,13 +389,13 @@ img.Logo-Copy-3 {
   color: #2d2d2d;
 }
 
-.echo-cb{
+.autoFill-cb{
   width: 14px;
   height: 14px;
   margin: 23px 0 0 38px;
 }
 
-.echo-cb:checked{
+.autoFill-cb:checked{
   background-color: #01a1ee;
   border-color: #01a1ee;
 }
@@ -1783,7 +1783,7 @@ input[type="file"] {
 //     margin: 0px;
 //   }
 
-//   .echoContainer{
+//   .autoFillContainer{
 //     width: 15%;
 //     margin: 0px;
 //     display: flex;

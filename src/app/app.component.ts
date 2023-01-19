@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, OnChanges{
   userID: any;
   screenID: any;
   appID: any;
-  echo = false;
+  autoFill = false;
   container: any;
   authbtnDisabled = true;
   colorBG = "#362f2f";
@@ -573,19 +573,17 @@ export class AppComponent implements OnInit, OnChanges{
       this.ws.addEventListener('message', (evt: any) => {
         this.serverReply += "\n" + evt.data + "\n";
         this.ref.detectChanges();
-        console.log(this.echo);
-        if(JSON.parse(evt.data).method === "chatMenuCallback" && this.echo == true){
+        console.log(this.autoFill);
+        if(JSON.parse(evt.data).method === "chatMenuCallback" && this.autoFill == true){
           let user_ID = String(JSON.parse(evt.data).chatMenuCallback.chat.id);
           let screen_ID = JSON.parse(evt.data).chatMenuCallback.menu_ref;
           let app_id = String(JSON.parse(evt.data).chatMenuCallback.app_id);
+          let button_callback = JSON.parse(evt.data).chatMenuCallback.button_callback;
           this.form.setControl("user_id", this.fb.control(user_ID, Validators.required));
           this.form.setControl("screen_id", this.fb.control(screen_ID, Validators.required));
           this.form.setControl("app_id", this.fb.control(app_id, Validators.required));
-          let btnData = JSON.parse(evt.data).chatMenuCallback.button_data;
-          console.log(btnData);
-          if(this.form.get("cell_id")?.value != null){
-            this.sendTheRequest(this.makeFile(btnData));
-          }
+          this.form.setControl("button_callback", this.fb.control(button_callback, Validators.required));
+          this.form.setControl("cell_id", this.fb.control(button_callback, Validators.required));
         }
       });
       this.ws.addEventListener('close', (evt: any) => {
@@ -610,9 +608,9 @@ export class AppComponent implements OnInit, OnChanges{
     this.serverReply = "";
   }
 
-  echoToggle(){
-    this.echo = !this.echo;
-    console.log(this.echo);
+  autoFillToggle(){
+    this.autoFill = !this.autoFill;
+    console.log(this.autoFill);
   }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   MOBILE_TYPES = {
