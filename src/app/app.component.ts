@@ -32,15 +32,15 @@ export class AppComponent implements OnInit, OnChanges{
   colorIcon = "#38b3df";
   btnStyles = [
     {
-      field: "button_callback",
+      field: "callback",
       name: "Callback",
       type: "String",
       required: true,
       value: null
     },
     {
-      field: "next_menu",
-      name: "Next Menu",
+      field: "next_screen",
+      name: "Next Screen",
       type: "Menu",
       required: false,
       value: null
@@ -67,21 +67,21 @@ export class AppComponent implements OnInit, OnChanges{
       value: null
     },
     {
-      field: "button_bgcolor",
+      field: "bg_color",
       name: "Background Color",
       type: "Color",
       required: false,
       value: null
     },
     {
-      field: "button_label",
+      field: "label",
       name: "Label",
       type: "String",
       required: false,
       value: null
     },
     {
-      field: "button_url",
+      field: "url",
       name: "URL",
       type: "String",
       required: false,
@@ -130,28 +130,28 @@ export class AppComponent implements OnInit, OnChanges{
       value: null
     },
     {
-      field: "button_db",
-      name: "Button db",
+      field: "cache",
+      name: "Cache",
       type: "Radio",
       required: true,
       value: null
     },
     {
-      field: "button_value",
+      field: "value",
       name: "Value",
       type: "String",
       required: false,
       value: null
     },
     {
-      field: "button_hint",
+      field: "hint",
       name: "Hint",
       type: "String",
       required: false,
       value: null
     },
     {
-      field: "button_sub_label",
+      field: "sublabel",
       name: "Sub-Label",
       type: "String",
       required: false,
@@ -246,14 +246,14 @@ export class AppComponent implements OnInit, OnChanges{
   form = this.fb.group({
     "user_id": new FormControl("",Validators.required),
     "screen_id": new FormControl(null,Validators.required),
-    "button_callback": new FormControl(null,Validators.required),
-    "next_menu": new FormControl(),
+    "callback": new FormControl(null,Validators.required),
+    "next_screen": new FormControl(),
     "button_span": new FormControl(),
     "button_order": new FormControl(),
     "button_textcolor": new FormControl(),
-    "button_bgcolor": new FormControl(),
-    "button_label": new FormControl(),
-    "button_url": new FormControl(),
+    "bg_color": new FormControl(),
+    "label": new FormControl(),
+    "url": new FormControl(),
     "button_query": new FormControl(),
     "app_id": new FormControl(),
     "cell_id": new FormControl(),
@@ -261,10 +261,10 @@ export class AppComponent implements OnInit, OnChanges{
     "button_keyboard": new FormControl(),
     "button-form_type": new FormControl(null,Validators.required),
     "button_style": new FormControl(null,Validators.required),
-    "button_db": new FormControl(null,Validators.required),
-    "button_value": new FormControl(),
-    "button_hint": new FormControl(),
-    "button_sub_label": new FormControl(),
+    "cache": new FormControl(null,Validators.required),
+    "value": new FormControl(),
+    "hint": new FormControl(),
+    "sublabel": new FormControl(),
     "button_format": new FormControl(),
     "button_start_date": new FormControl(),
     "button_end_date": new FormControl(),
@@ -373,7 +373,7 @@ export class AppComponent implements OnInit, OnChanges{
 
   onChangeBgColor(e: any){
     this.colorBG = e;
-    this.form.setControl("button_bgcolor", this.fb.control(e, Validators.required));
+    this.form.setControl("bg_color", this.fb.control(e, Validators.required));
   }
 
   onChangeIconBgColor(e: any){
@@ -584,7 +584,7 @@ export class AppComponent implements OnInit, OnChanges{
           this.form.setControl("user_id", this.fb.control(user_ID, Validators.required));
           this.form.setControl("screen_id", this.fb.control(screen_ID, Validators.required));
           this.form.setControl("app_id", this.fb.control(app_id, Validators.required));
-          this.form.setControl("button_callback", this.fb.control(button_callback, Validators.required));
+          this.form.setControl("callback", this.fb.control(button_callback, Validators.required));
           this.form.setControl("cell_id", this.fb.control(button_callback, Validators.required));
         }
       });
