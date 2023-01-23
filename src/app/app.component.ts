@@ -46,21 +46,21 @@ export class AppComponent implements OnInit, OnChanges{
       value: null
     },
     {
-      field: "button_span",
+      field: "span",
       name: "Span",
       type: "Number",
       required: false,
       value: null
     },
     {
-      field: "button_order",
+      field: "order",
       name: "Order",
       type: "Number",
       required: false,
       value: null
     },
     {
-      field: "button_textcolor",
+      field: "textcolor",
       name: "Text Color",
       type: "Color",
       required: false,
@@ -88,7 +88,7 @@ export class AppComponent implements OnInit, OnChanges{
       value: null
     },
     {
-      field: "button_query",
+      field: "query",
       name: "Query",
       type: "String",
       required: false,
@@ -102,14 +102,14 @@ export class AppComponent implements OnInit, OnChanges{
       value: null
     },
     {
-      field: "button_type",
+      field: "type",
       name: "Type",
       type: "String",
       required: true,
       value: null
     },
     {
-      field: "button_keyboard",
+      field: "keyboard",
       name: "Keyboard",
       type: "String",
       required: false,
@@ -123,7 +123,7 @@ export class AppComponent implements OnInit, OnChanges{
       value: null
     },
     {
-      field: "button_style",
+      field: "style",
       name: "Style",
       type: "String",
       required: true,
@@ -158,84 +158,84 @@ export class AppComponent implements OnInit, OnChanges{
       value: null
     },
     {
-      field: "button_format",
+      field: "format",
       name: "Format",
       type: "String",
       required: false,
       value: null
     },
     {
-      field: "button_start_date",
+      field: "start_date",
       name: "Start Date",
       type: "Date",
       required: false,
       value: null
     },
     {
-      field: "button_end_date",
+      field: "end_date",
       name: "End Date",
       type: "Date",
       required: false,
       value: null
     },
     {
-      field: "button_age_verification",
+      field: "age_verification",
       name: "Age Verification",
       type: "Number",
       required: false,
       value: null
     },
     {
-      field: "button_past_date",
+      field: "past_date",
       name: "Past Date",
       type: "Radio",
       required: false,
       value: null
     },
     {
-      field: "button_future_date",
+      field: "future_date",
       name: "Future Date",
       type: "Radio",
       required: false,
       value: null
     },
     {
-      field: "button_list_option",
+      field: "list_option",
       name: "Button List Option",
       type: "String",
       required: false,
       value: null
     },
     {
-      field: "button_list_option_selection",
+      field: "list_option_selection",
       name: "Button List Option Selection",
       type: "Array",
       required: false,
       value: null
     },
     {
-      field: "button_min_value",
+      field: "min_value",
       name: "Minimum Value",
       type: "Number",
       required: false,
       value: null
     },
     {
-      field: "button_max_value",
+      field: "max_value",
       name: "Maximum Value",
       type: "Number",
       required: false,
       value: null
     },
     {
-      field: "button_step_value",
+      field: "step_value",
       name: "Step Value",
       type: "Number",
       required: false,
       value: null
     },
     {
-      field: "button_icon_bgcolor",
+      field: "icon_bgcolor",
       name: "Icon Background Color",
       type: "Color",
       required: false,
@@ -248,35 +248,35 @@ export class AppComponent implements OnInit, OnChanges{
     "screen_id": new FormControl(null,Validators.required),
     "callback": new FormControl(null,Validators.required),
     "next_screen": new FormControl(),
-    "button_span": new FormControl(),
-    "button_order": new FormControl(),
-    "button_textcolor": new FormControl(),
+    "span": new FormControl(),
+    "order": new FormControl(),
+    "textcolor": new FormControl(),
     "bg_color": new FormControl(),
     "label": new FormControl(),
     "url": new FormControl(),
-    "button_query": new FormControl(),
+    "query": new FormControl(),
     "app_id": new FormControl(),
     "cell_id": new FormControl(),
-    "button_type": new FormControl(null,Validators.required),
-    "button_keyboard": new FormControl(),
+    "type": new FormControl(null,Validators.required),
+    "keyboard": new FormControl(),
     "button-form_type": new FormControl(null,Validators.required),
-    "button_style": new FormControl(null,Validators.required),
+    "style": new FormControl(null,Validators.required),
     "cache": new FormControl(null,Validators.required),
     "value": new FormControl(),
     "hint": new FormControl(),
     "sublabel": new FormControl(),
-    "button_format": new FormControl(),
-    "button_start_date": new FormControl(),
-    "button_end_date": new FormControl(),
-    "button_age_verification": new FormControl(),
-    "button_past_date": new FormControl(),
-    "button_future_date": new FormControl(),
-    "button_list_option": new FormControl(),
-    "button_list_option_selection": new FormControl(),
-    "button_min_value": new FormControl(),
-    "button_max_value": new FormControl(),
-    "button_step_value": new FormControl(),
-    "button_icon_bgcolor": new FormControl()
+    "format": new FormControl(),
+    "start_date": new FormControl(),
+    "end_date": new FormControl(),
+    "age_verification": new FormControl(),
+    "past_date": new FormControl(),
+    "future_date": new FormControl(),
+    "list_option": new FormControl(),
+    "list_option_selection": new FormControl(),
+    "min_value": new FormControl(),
+    "max_value": new FormControl(),
+    "step_value": new FormControl(),
+    "icon_bgcolor": new FormControl()
   });
 
   constructor(private ref: ChangeDetectorRef, private fb: FormBuilder){
@@ -347,7 +347,7 @@ export class AppComponent implements OnInit, OnChanges{
         btnData[key] = value;
       }
     });
-    btnData["button_icon"] = this.svgPath.name;
+    btnData["icon"] = this.svgPath.name;
     this.btnjson = data;
     this.btnjson.push(btnData);
     let file = JSON.stringify(
@@ -368,7 +368,7 @@ export class AppComponent implements OnInit, OnChanges{
 
   onChangeTxtColor(e: any){
     this.colorTxt = e;
-    this.form.setControl("button_textcolor", this.fb.control(e, Validators.required));
+    this.form.setControl("textcolor", this.fb.control(e, Validators.required));
   }
 
   onChangeBgColor(e: any){
@@ -378,7 +378,7 @@ export class AppComponent implements OnInit, OnChanges{
 
   onChangeIconBgColor(e: any){
     this.colorIcon = e;
-    this.form.setControl("button_icon_bgcolor", this.fb.control(e, Validators.required));
+    this.form.setControl("icon_bgcolor", this.fb.control(e, Validators.required));
   }
 
   download(saveLocation: any){
@@ -416,7 +416,7 @@ export class AppComponent implements OnInit, OnChanges{
         value: this.screenID
       },
       {
-        field: "button_icon",
+        field: "icon",
         name: "Icon",
         type: "SVG Path",
         required: false,

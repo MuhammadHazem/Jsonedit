@@ -115,17 +115,17 @@
             <span class="type-label">
               Type:
             </span>
-            <input type="text" class="type-input" formControlName="button_type" placeholder="Please enter type">
+            <input type="text" class="type-input" formControlName="type" placeholder="Please enter type">
           </div>
           <div class="row">
             <span class="style-label">
               Style:
             </span>
-            <input type="text" class="style-input" formControlName="button_style" placeholder="Please enter style">
+            <input type="text" class="style-input" formControlName="style" placeholder="Please enter style">
             <span class="span-label">
               Span:
             </span>
-            <input type="number" class="span-input" formControlName="button_span" placeholder="Please enter span">
+            <input type="number" class="span-input" formControlName="span" placeholder="Please enter span">
           </div>
           <div class="row">
             <span class="BG-color-label">
@@ -303,7 +303,7 @@
                   [style.color]="colorIcon"
                   [cpOutputFormat]="'hex'"
                   type="button"
-                  formControlName="button_icon_bgcolor"
+                  formControlName="icon_bgcolor"
                   (colorPickerChange)="onChangeIconBgColor($event)"
                 />
               </div>
@@ -328,7 +328,7 @@
                   [style.color]="colorTxt"
                   [cpOutputFormat]="'hex'"
                   type="button"
-                  formControlName="button_textcolor"
+                  formControlName="textcolor"
                   (colorPickerChange)="onChangeTxtColor($event)"
                 />
               </div>
@@ -346,7 +346,7 @@
             <span class="kb-label">
               Keyboard:
             </span>
-            <input type="text" class="kb-input" formControlName="button_keyboard" placeholder="Please enter keyboard">
+            <input type="text" class="kb-input" formControlName="keyboard" placeholder="Please enter keyboard">
           </div>
           <div class="row">
             <span class="value-label">
@@ -393,7 +393,7 @@
             <span class="query-label">
               Query:
             </span>
-            <input type="text" class="query-input" formControlName="button_query" placeholder="Please enter query">
+            <input type="text" class="query-input" formControlName="query" placeholder="Please enter query">
             <span class="ft-label">
               From Type:
             </span>
@@ -403,41 +403,41 @@
             <span class="order-label">
               Order:
             </span>
-            <input type="number" class="order-input" formControlName="button_order" placeholder="Please enter order">
+            <input type="number" class="order-input" formControlName="order" placeholder="Please enter order">
             <span class="format-label">
               Format:
             </span>
-            <input type="text" class="format-input" formControlName="button_format" placeholder="Please enter format">
+            <input type="text" class="format-input" formControlName="format" placeholder="Please enter format">
           </div>
           <div class="row">
             <span class="age-label">
               Age Verify:
             </span>
-            <input type="number" class="age-input" min="0" formControlName="button_age_verification" placeholder="Please enter age">
+            <input type="number" class="age-input" min="0" formControlName="age_verification" placeholder="Please enter age">
             <span class="list-label">
               List Option:
             </span>
-            <input type="text" class="list-input" formControlName="button_list_option" placeholder="Please enter list option">
+            <input type="text" class="list-input" formControlName="list_option" placeholder="Please enter list option">
           </div>
           <div class="row">
             <span class="sel-label">
               Selection:
             </span>
-            <input type="text" class="sel-input" formControlName="button_list_option_selection" placeholder="Please enter selection">
+            <input type="text" class="sel-input" formControlName="list_option_selection" placeholder="Please enter selection">
             <span class="min-value-label">
               Min Value:
             </span>
-            <input type="number" class="min-value-input" formControlName="button_min_value" placeholder="Please enter min value">
+            <input type="number" class="min-value-input" formControlName="min_value" placeholder="Please enter min value">
           </div>
           <div class="row">
             <span class="max-value-label">
               Max Value:
             </span>
-            <input type="number" class="max-value-input" formControlName="button_max_value" placeholder="Please enter max value">
+            <input type="number" class="max-value-input" formControlName="max_value" placeholder="Please enter max value">
             <span class="step-value-label">
               Step Value:
             </span>
-            <input type="number" class="step-value-input" formControlName="button_step_value" placeholder="Please enter step value">
+            <input type="number" class="step-value-input" formControlName="step_value" placeholder="Please enter step value">
           </div>
           <div class="row" #daterow>
             <span class="start-date-label">
@@ -456,32 +456,32 @@
               > -->
 
 
-            <input type="date" class="start-date-input" formControlName="button_start_date">
+            <input type="date" class="start-date-input" formControlName="start_date">
             <span class="end-date-label">
               End Date:
             </span>
-            <input type="date" class="end-date-input" formControlName="button_end_date">
+            <input type="date" class="end-date-input" formControlName="end_date">
           </div>
           <div class="row">
             <span class="past-date-label">
               Past Date:
             </span>
-            <input type="radio" class="past-date-true-cb" formControlName="button_past_date" value="1">
+            <input type="radio" class="past-date-true-cb" formControlName="past_date" value="1">
             <span class="past-date-true-label">
               True
             </span>
-            <input type="radio" class="past-date-false-cb" formControlName="button_past_date" value="0">
+            <input type="radio" class="past-date-false-cb" formControlName="past_date" value="0">
             <span class="past-date-false-label">
               False
             </span>
             <span class="future-date-label">
               Future Date:
             </span>
-            <input type="radio" class="future-date-true-cb" formControlName="button_future_date" value="1">
+            <input type="radio" class="future-date-true-cb" formControlName="future_date" value="1">
             <span class="future-date-true-label">
               True
             </span>
-            <input type="radio" class="future-date-false-cb" formControlName="button_future_date" value="0">
+            <input type="radio" class="future-date-false-cb" formControlName="future_date" value="0">
             <span class="future-date-false-label">
               False
             </span>
