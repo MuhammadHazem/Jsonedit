@@ -30,6 +30,7 @@ export class AppComponent implements OnInit, OnChanges{
   colorBG = "#362f2f";
   colorTxt = "#ffffff";
   colorIcon = "#38b3df";
+  colorBorder = "#ffffff";
   btnStyles = [
     {
       field: "callback",
@@ -240,6 +241,13 @@ export class AppComponent implements OnInit, OnChanges{
       type: "Color",
       required: false,
       value: null
+    },
+    {
+      field: "border_color",
+      name: "Border Color",
+      type: "Color",
+      required: false,
+      value: null
     }
   ]
 
@@ -276,7 +284,8 @@ export class AppComponent implements OnInit, OnChanges{
     "min_value": new FormControl(),
     "max_value": new FormControl(),
     "step_value": new FormControl(),
-    "icon_bgcolor": new FormControl()
+    "icon_bgcolor": new FormControl(),
+    "border_color": new FormControl()
   });
 
   constructor(private ref: ChangeDetectorRef, private fb: FormBuilder){
@@ -379,6 +388,11 @@ export class AppComponent implements OnInit, OnChanges{
   onChangeIconBgColor(e: any){
     this.colorIcon = e;
     this.form.setControl("icon_bgcolor", this.fb.control(e, Validators.required));
+  }
+
+  onChangeBorderColor(e: any){
+    this.colorBorder = e;
+    this.form.setControl("border_color", this.fb.control(e, Validators.required));
   }
 
   download(saveLocation: any){

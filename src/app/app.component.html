@@ -339,6 +339,27 @@
             <input type="text" class="sub-label-input" formControlName="sublabel" placeholder="Please enter label">
           </div>
           <div class="row">
+            <span class="border-color-label">
+              Border Color:
+            </span>
+            <div class="border-color-outer-border">
+              <div class="border-color-inner-border">
+                <input
+                  [(colorPicker)]="colorBorder"
+                  [style.background]="colorBorder"
+                  [cpOKButton]="true"
+                  [cpSaveClickOutside]="false"
+                  [cpPosition]="'bottom'"
+                  [style.color]="colorBorder"
+                  [cpOutputFormat]="'hex'"
+                  type="button"
+                  formControlName="border_color"
+                  (colorPickerChange)="onChangeBorderColor($event)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <span class="hint-label">
               Hint:
             </span>
