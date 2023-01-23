@@ -350,15 +350,16 @@ export class AppComponent implements OnInit, OnChanges{
     btnData["button_icon"] = this.svgPath.name;
     this.btnjson = data;
     this.btnjson.push(btnData);
-    this.btnjson = JSON.stringify(this.btnjson);
     let file = JSON.stringify(
       {
-        method: "sendCellMessage",
+        method: "setWorkflow",
         user_id: String(this.userID),
         screen_id: this.screenID,
         cell_id: this.form.controls["cell_id"].value,
         app_id: String(this.appID),
-        text: this.btnjson,
+        message: "",
+        type: null,
+        workflow_cell: this.btnjson,
         reference: 123456789
       }
     )
@@ -560,6 +561,7 @@ export class AppComponent implements OnInit, OnChanges{
     if (!this.ws || this.ws.readyState != WebSocket.OPEN) {
       console.log("url: " + this.url);
       this.ws = new WebSocket(this.url);
+      this.ws.onopen = (event: any) => console.log(event);
       this.ws.addEventListener('open', (evt: any) => {
         this.status = "Connected";
         let statusbg = document.getElementById("statusbg");
