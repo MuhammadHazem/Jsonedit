@@ -9,7 +9,6 @@
 
 .header{
   height: 53px;
-  margin: 0 0 21px;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.14);
   background-color: #fff;
   display: flex;
@@ -52,9 +51,9 @@ img.Logo-Copy-3 {
 .fileEdit{
   flex-direction: column;
   position: absolute;
-  translate: 158px 67px;
+  translate: 158px 46px;
   width: 96px;
-  height: 100px;
+  height: 66px;
   border-radius: 6px;
   box-shadow: 0 7px 11px 0 #e2e6ee;
   border: solid 1px #ebeef4;
@@ -116,6 +115,10 @@ img.Logo-Copy-3 {
   border: none;
 }
 
+.submit-btn-header:hover{
+  background-color: #66cafc;
+}
+
 .submit-btn-txt-header{
   font-family: Roboto;
   font-size: 12px;
@@ -150,7 +153,7 @@ img.Logo-Copy-3 {
 
 .auth-container{
   width: 632px;
-  height: 167px;
+  height: 210px;
   margin: 0 0 9.5px;
   border-radius: 4px;
   border: solid 1px #dfe5ea;
@@ -302,7 +305,7 @@ img.Logo-Copy-3 {
 
 .setting-container{
   width: 632px;
-  height: 135.5px;
+  height: 179.5px;
   margin: 0 0 9.5px;
   // padding: 0 1px 22px 0;
   border-radius: 4px;
@@ -326,6 +329,71 @@ img.Logo-Copy-3 {
   font-weight: 500;
   color: #2d2d2d;
   margin-left: 12px;
+}
+
+.header-right{
+  display: flex;
+  margin-left: 245px;
+  align-items: center;
+}
+
+.newBtn{
+  width: 75.5px;
+  height: 26px;
+  margin: 4px 0 5px 5px;
+  border-radius: 16px;
+  background-color: #26b2f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.newBtn-txt{
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.newBtn:hover{
+  background-color: #66cafc;
+}
+
+.forwardBtn{
+  width: 20px;
+  height: 20px;
+  background-image: url("/assets/chevronArrow.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+}
+
+.menuTab-txt{
+  margin: 0 25px 0 25px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  color: #006597;
+}
+
+.backwardBtn{
+  width: 20px;
+  height: 20px;
+  margin: 0 0 0 20px;
+  background-image: url("/assets/chevronArrow.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: scaleX(-1);
+  border: none;
+}
+
+.forwardBtn:hover{
+  background-color: #cad1d4;
+}
+
+.backwardBtn:hover{
+  background-color: #cad1d4;
 }
 
 .UID-label{
@@ -400,9 +468,29 @@ img.Logo-Copy-3 {
   border-color: #01a1ee;
 }
 
+.autoReply-label{
+  width: 64px;
+  margin: 22px 0 0 228px;
+  font-family: Roboto;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #2d2d2d;
+}
+
+.autoReply-cb{
+  width: 14px;
+  height: 14px;
+  margin: 23px 0 0 16px;
+}
+
+.autoReply-cb:checked{
+  background-color: #01a1ee;
+  border-color: #01a1ee;
+}
+
 .cell-container{
   width: 631px;
-  height: 420px;
+  height: 328px;
   margin: 0 0 9.5px;
   border-radius: 4px;
   border: solid 1px #dfe5ea;
@@ -507,7 +595,7 @@ img.Logo-Copy-3 {
 
 .type-label {
   width: 64px;
-  margin: 19.5px 0 0 32px;
+  margin: 19.5px 0 0 12px;
   font-family: Roboto;
   font-size: 11.5px;
   font-weight: 500;
@@ -517,7 +605,7 @@ img.Logo-Copy-3 {
 .type-input{
   width: 197.5px;
   height: 28.5px;
-  margin: 10px 0 0 11.5px;
+  margin: 10px 0 0 18.5px;
   border-radius: 3px;
   border: solid 1px #d5d7e0;
   font-family: Roboto;
@@ -613,7 +701,7 @@ img.Logo-Copy-3 {
 
 .icon-label {
   width: 64px;
-  margin: 17.5px 0 0 213px;
+  margin: 17.5px 0 0 33px;
   font-family: Roboto;
   font-size: 11.5px;
   font-weight: 500;
@@ -817,7 +905,7 @@ ul {
 
 .border-color-label{
   width: 68px;
-  margin: 13px 0 0 12px;
+  margin: 19px 0 0 212px;
   font-family: Roboto;
   font-size: 11.5px;
   font-weight: 500;
@@ -827,7 +915,7 @@ ul {
 .border-color-outer-border{
   width: 27px;
   height: 27px;
-  margin: 6px 0 6px 14.5px;
+  margin: 9px 0 0 11px;
   border-radius: 3px;
   border: solid 1px #d5d7e0;
   display: flex;
@@ -1588,6 +1676,10 @@ input[type=date]::-webkit-datetime-edit {
   border: none;
 }
 
+.submit-btn:hover{
+  background-color: #66cafc;
+}
+
 .submit-btn-txt {
   font-family: Roboto;
   font-size: 12px;
@@ -1694,8 +1786,8 @@ input[type="file"] {
 
 .reply-container {
   width: 303px;
-  height: 875px;
-  margin: 15px 329px 460px 33.5px;
+  height: 1267px;
+  margin: 15px 329px 0 33.5px;
   padding: 12.5px 6.5px 9px;
   border-radius: 8px;
   box-shadow: 0 0 10px 0 rgba(208, 220, 228, 0.8);
@@ -1722,11 +1814,30 @@ input[type="file"] {
 
 .txtarea{
   width: 296.5px;
-  height: 824px;
-  margin: 6.5px 0px;
+  height: 1162px;
+  margin: 6.5px 0 0 0;
   border-radius: 5px;
   border: solid 1px #dfe5ea;
   resize: none;
+}
+
+.txtarea-clear-btn{
+  width: 76px;
+  height: 26.5px;
+  margin: 0 6px 0 0;
+  border-radius: 18px;
+  border: solid 1px #26b2f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.txtarea-footer{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 17.5px 0 0 0;
 }
 // :host{
 

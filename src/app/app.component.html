@@ -18,10 +18,10 @@
       <div class="saveMenuContainer" (click)="download('download')">
         Save
       </div>
-      <div class="menuLine"></div>
+      <!-- <div class="menuLine"></div>
       <div class="saveAsMenuContainer" (click)="download('downloadAs')">
         Save as
-      </div>
+      </div> -->
     </div>
     <button type="submit" class="submit-btn-header" form="form">
       <span class="submit-btn-txt-header">
@@ -29,9 +29,6 @@
       </span>
     </button>
   </div>
-  <span class="ScreenTypeStyle">
-    Screen/Type/Style
-  </span>
   <div class="content">
     <div class="input-container">
       <form [formGroup]="form" id="form" name="form" (ngSubmit)="submitStyles()">
@@ -67,12 +64,32 @@
               Auth
             </span>
           </button>
+          <div class="row">
+            <span class="autoFill-label">
+              Auto-fill:
+            </span>
+            <input type="checkbox" class="autoFill-cb" (click)="autoFillToggle()">
+            <span class="autoReply-label">
+              Auto-reply:
+            </span>
+            <input type="checkbox" class="autoReply-cb" (click)="autoReplyToggle()">
+          </div>
         </div>
         <div class="setting-container">
           <div class="setting-header">
             <span class="setting-header-txt">
-              General Settings
+              General Settings & Conditions
             </span>
+            <div class="header-right">
+              <button class="newBtn" (click)="newStyle()">
+                <span class="newBtn-txt">
+                  New
+                </span>
+              </button>
+              <button class="backwardBtn" (click)="backStyle()"></button>
+              <span class="menuTab-txt">{{currentStyleNum}} / {{totalStyleNum}}</span>
+              <button class="forwardBtn" (click)="nextStyle()"></button>
+            </div>
           </div>
           <div class="row">
             <span class="UID-label">
@@ -83,19 +100,6 @@
               Screen ID:
             </span>
             <input type="text" class="SID-input" formControlName="screen_id" placeholder="Please enter screen ID">
-          </div>
-          <div class="row">
-            <span class="autoFill-label">
-              Autofill:
-            </span>
-            <input type="checkbox" class="autoFill-cb" (click)="autoFillToggle()">
-          </div>
-        </div>
-        <div class="cell-container">
-          <div class="cell-header">
-            <span class="cell-header-txt">
-              Cell Settings
-            </span>
           </div>
           <div class="row">
             <span class="APP-label">
@@ -112,41 +116,29 @@
               Callback:
             </span>
             <input type="text" class="CB-input" formControlName="callback" placeholder="Please enter callback">
+          </div>
+        </div>
+        <div class="cell-container">
+          <div class="cell-header">
+            <span class="cell-header-txt">
+              Cell Settings
+            </span>
+          </div>
+          <div class="row">
             <span class="type-label">
               Type:
             </span>
             <input type="text" class="type-input" formControlName="type" placeholder="Please enter type">
-          </div>
-          <div class="row">
-            <span class="style-label">
-              Style:
-            </span>
-            <input type="text" class="style-input" formControlName="style" placeholder="Please enter style">
             <span class="span-label">
               Span:
             </span>
             <input type="number" class="span-input" formControlName="span" placeholder="Please enter span">
           </div>
           <div class="row">
-            <span class="BG-color-label">
-              BG Color:
+            <span class="style-label">
+              Style:
             </span>
-            <div class="BG-color-outer-border">
-              <div class="BG-color-inner-border">
-                <input
-                  [(colorPicker)]="colorBG"
-                  [style.background]="colorBG"
-                  [cpOKButton]="true"
-                  [cpSaveClickOutside]="false"
-                  [cpPosition]="'bottom'"
-                  [style.color]="colorBG"
-                  [cpOutputFormat]="'hex'"
-                  type="button"
-                  formControlName="bg_color"
-                  (colorPickerChange)="onChangeBgColor($event)"
-                />
-              </div>
-            </div>
+            <input type="text" class="style-input" formControlName="style" placeholder="Please enter style">
             <span class="icon-label">
               Icon:
             </span>
@@ -289,6 +281,46 @@
             </div>
           </div>
           <div class="row">
+            <span class="BG-color-label">
+              BG Color:
+            </span>
+            <div class="BG-color-outer-border">
+              <div class="BG-color-inner-border">
+                <input
+                  [(colorPicker)]="colorBG"
+                  [style.background]="colorBG"
+                  [cpOKButton]="true"
+                  [cpSaveClickOutside]="false"
+                  [cpPosition]="'bottom'"
+                  [style.color]="colorBG"
+                  [cpOutputFormat]="'hex'"
+                  type="button"
+                  formControlName="bg_color"
+                  (colorPickerChange)="onChangeBgColor($event)"
+                />
+              </div>
+            </div>
+            <span class="border-color-label">
+              Border Color:
+            </span>
+            <div class="border-color-outer-border">
+              <div class="border-color-inner-border">
+                <input
+                  [(colorPicker)]="colorBorder"
+                  [style.background]="colorBorder"
+                  [cpOKButton]="true"
+                  [cpSaveClickOutside]="false"
+                  [cpPosition]="'bottom'"
+                  [style.color]="colorBorder"
+                  [cpOutputFormat]="'hex'"
+                  type="button"
+                  formControlName="border_color"
+                  (colorPickerChange)="onChangeBorderColor($event)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <span class="icon-color-label">
               Icon Color:
             </span>
@@ -337,27 +369,6 @@
               Sub Label:
             </span>
             <input type="text" class="sub-label-input" formControlName="sublabel" placeholder="Please enter label">
-          </div>
-          <div class="row">
-            <span class="border-color-label">
-              Border Color:
-            </span>
-            <div class="border-color-outer-border">
-              <div class="border-color-inner-border">
-                <input
-                  [(colorPicker)]="colorBorder"
-                  [style.background]="colorBorder"
-                  [cpOKButton]="true"
-                  [cpSaveClickOutside]="false"
-                  [cpPosition]="'bottom'"
-                  [style.color]="colorBorder"
-                  [cpOutputFormat]="'hex'"
-                  type="button"
-                  formControlName="border_color"
-                  (colorPickerChange)="onChangeBorderColor($event)"
-                />
-              </div>
-            </div>
           </div>
           <div class="row">
             <span class="hint-label">
@@ -528,9 +539,16 @@
         Response Message
       </div>
     </div>
-    <textarea class="txtarea">
+    <textarea id="txtarea" class="txtarea">
       {{serverReply}}
     </textarea>
+    <div class="txtarea-footer">
+      <button class="txtarea-clear-btn" (click)="clearTxtArea()">
+        <span class="clear-btn-txt">
+          Clear
+        </span>
+      </button>
+    </div>
   </div>
 </div>
 

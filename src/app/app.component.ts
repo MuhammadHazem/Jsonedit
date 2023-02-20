@@ -25,230 +25,229 @@ export class AppComponent implements OnInit, OnChanges{
   screenID: any;
   appID: any;
   autoFill = false;
+  autoReply = false;
+  currentStyleNum = 1;
+  totalStyleNum = 1;
   container: any;
   authbtnDisabled = true;
   colorBG = "#362f2f";
   colorTxt = "#ffffff";
   colorIcon = "#38b3df";
   colorBorder = "#ffffff";
+  styleID = 0;
   btnStyles = [
-    {
-      field: "callback",
-      name: "Callback",
-      type: "String",
-      required: true,
-      value: null
-    },
-    {
-      field: "next_screen",
-      name: "Next Screen",
-      type: "Menu",
-      required: false,
-      value: null
-    },
-    {
-      field: "span",
-      name: "Span",
-      type: "Number",
-      required: false,
-      value: null
-    },
-    {
-      field: "order",
-      name: "Order",
-      type: "Number",
-      required: false,
-      value: null
-    },
-    {
-      field: "textcolor",
-      name: "Text Color",
-      type: "Color",
-      required: false,
-      value: null
-    },
-    {
-      field: "bg_color",
-      name: "Background Color",
-      type: "Color",
-      required: false,
-      value: null
-    },
-    {
-      field: "label",
-      name: "Label",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "url",
-      name: "URL",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "query",
-      name: "Query",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "cell_id",
-      name: "Cell ID",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "type",
-      name: "Type",
-      type: "String",
-      required: true,
-      value: null
-    },
-    {
-      field: "keyboard",
-      name: "Keyboard",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "button-form_type",
-      name: "Button-Form Type",
-      type: "String",
-      required: true,
-      value: null
-    },
-    {
-      field: "style",
-      name: "Style",
-      type: "String",
-      required: true,
-      value: null
-    },
-    {
-      field: "cache",
-      name: "Cache",
-      type: "Radio",
-      required: true,
-      value: null
-    },
-    {
-      field: "value",
-      name: "Value",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "hint",
-      name: "Hint",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "sublabel",
-      name: "Sub-Label",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "format",
-      name: "Format",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "start_date",
-      name: "Start Date",
-      type: "Date",
-      required: false,
-      value: null
-    },
-    {
-      field: "end_date",
-      name: "End Date",
-      type: "Date",
-      required: false,
-      value: null
-    },
-    {
-      field: "age_verification",
-      name: "Age Verification",
-      type: "Number",
-      required: false,
-      value: null
-    },
-    {
-      field: "past_date",
-      name: "Past Date",
-      type: "Radio",
-      required: false,
-      value: null
-    },
-    {
-      field: "future_date",
-      name: "Future Date",
-      type: "Radio",
-      required: false,
-      value: null
-    },
-    {
-      field: "list_option",
-      name: "Button List Option",
-      type: "String",
-      required: false,
-      value: null
-    },
-    {
-      field: "list_option_selection",
-      name: "Button List Option Selection",
-      type: "Array",
-      required: false,
-      value: null
-    },
-    {
-      field: "min_value",
-      name: "Minimum Value",
-      type: "Number",
-      required: false,
-      value: null
-    },
-    {
-      field: "max_value",
-      name: "Maximum Value",
-      type: "Number",
-      required: false,
-      value: null
-    },
-    {
-      field: "step_value",
-      name: "Step Value",
-      type: "Number",
-      required: false,
-      value: null
-    },
-    {
-      field: "icon_bgcolor",
-      name: "Icon Background Color",
-      type: "Color",
-      required: false,
-      value: null
-    },
-    {
-      field: "border_color",
-      name: "Border Color",
-      type: "Color",
-      required: false,
-      value: null
-    }
+    [
+      {
+        field: "user_id",
+        name: "User ID",
+        type: "String",
+        value: null
+      },
+      {
+        field: "screen_id",
+        name: "Screen ID",
+        type: "String",
+        value: null
+      },
+      {
+        field: "app_id",
+        name: "App ID",
+        type: "String",
+        value: null
+      },
+      {
+        field: "callback",
+        name: "Callback",
+        type: "String",
+        value: null
+      },
+      {
+        field: "next_screen",
+        name: "Next Screen",
+        type: "Menu",
+        value: null
+      },
+      {
+        field: "span",
+        name: "Span",
+        type: "Number",
+        value: null
+      },
+      {
+        field: "order",
+        name: "Order",
+        type: "Number",
+        value: null
+      },
+      {
+        field: "textcolor",
+        name: "Text Color",
+        type: "Color",
+        value: null
+      },
+      {
+        field: "bg_color",
+        name: "Background Color",
+        type: "Color",
+        value: null
+      },
+      {
+        field: "label",
+        name: "Label",
+        type: "String",
+        value: null
+      },
+      {
+        field: "url",
+        name: "URL",
+        type: "String",
+        value: null
+      },
+      {
+        field: "query",
+        name: "Query",
+        type: "String",
+        value: null
+      },
+      {
+        field: "cell_id",
+        name: "Cell ID",
+        type: "String",
+        value: null
+      },
+      {
+        field: "type",
+        name: "Type",
+        type: "String",
+        value: null
+      },
+      {
+        field: "keyboard",
+        name: "Keyboard",
+        type: "String",
+        value: null
+      },
+      {
+        field: "button-form_type",
+        name: "Button-Form Type",
+        type: "String",
+        value: null
+      },
+      {
+        field: "style",
+        name: "Style",
+        type: "String",
+        value: null
+      },
+      {
+        field: "cache",
+        name: "Cache",
+        type: "Radio",
+        value: null
+      },
+      {
+        field: "value",
+        name: "Value",
+        type: "String",
+        value: null
+      },
+      {
+        field: "hint",
+        name: "Hint",
+        type: "String",
+        value: null
+      },
+      {
+        field: "sublabel",
+        name: "Sub-Label",
+        type: "String",
+        value: null
+      },
+      {
+        field: "format",
+        name: "Format",
+        type: "String",
+        value: null
+      },
+      {
+        field: "start_date",
+        name: "Start Date",
+        type: "Date",
+        value: null
+      },
+      {
+        field: "end_date",
+        name: "End Date",
+        type: "Date",
+        value: null
+      },
+      {
+        field: "age_verification",
+        name: "Age Verification",
+        type: "Number",
+        value: null
+      },
+      {
+        field: "past_date",
+        name: "Past Date",
+        type: "Radio",
+        value: null
+      },
+      {
+        field: "future_date",
+        name: "Future Date",
+        type: "Radio",
+        value: null
+      },
+      {
+        field: "list_option",
+        name: "Button List Option",
+        type: "String",
+        value: null
+      },
+      {
+        field: "list_option_selection",
+        name: "Button List Option Selection",
+        type: "Array",
+        value: null
+      },
+      {
+        field: "min_value",
+        name: "Minimum Value",
+        type: "Number",
+        value: null
+      },
+      {
+        field: "max_value",
+        name: "Maximum Value",
+        type: "Number",
+        value: null
+      },
+      {
+        field: "step_value",
+        name: "Step Value",
+        type: "Number",
+        value: null
+      },
+      {
+        field: "icon_bgcolor",
+        name: "Icon Background Color",
+        type: "Color",
+        value: null
+      },
+      {
+        field: "border_color",
+        name: "Border Color",
+        type: "Color",
+        value: null
+      },
+      {
+        field: "icon",
+        name: "Icon",
+        type: "SVG Path",
+        value: null
+      }
+    ]
   ]
 
   form = this.fb.group({
@@ -258,8 +257,8 @@ export class AppComponent implements OnInit, OnChanges{
     "next_screen": new FormControl(),
     "span": new FormControl(),
     "order": new FormControl(),
-    "textcolor": new FormControl(),
-    "bg_color": new FormControl(),
+    "textcolor": new FormControl("#ffffff"),
+    "bg_color": new FormControl("#362f2f"),
     "label": new FormControl(),
     "url": new FormControl(),
     "query": new FormControl(),
@@ -284,16 +283,16 @@ export class AppComponent implements OnInit, OnChanges{
     "min_value": new FormControl(),
     "max_value": new FormControl(),
     "step_value": new FormControl(),
-    "icon_bgcolor": new FormControl(),
-    "border_color": new FormControl()
+    "icon_bgcolor": new FormControl("#38b3df"),
+    "border_color": new FormControl("#ffffff")
   });
 
   constructor(private ref: ChangeDetectorRef, private fb: FormBuilder){
-    this.btnStyles.forEach(btn => {
-      if(btn.required == true){
-        this.required.push(btn.field);
-      }
-    });
+    // this.btnStyles[this.styleID].forEach(btn => {
+    //   if(btn.required == true){
+    //     this.required.push(btn.field);
+    //   }
+    // });
     // window.addEventListener('click', function(e: any){
     //   if (!document.getElementById('fileDM')!.contains(e.target) && (!document.getElementById('logo-menu')!.contains(e.target))){
     //    document.getElementById('l2')!.style.height="0px"; //the same code you've used to hide the menu
@@ -319,30 +318,21 @@ export class AppComponent implements OnInit, OnChanges{
       // }
     // });
     // if(fulfilled){
-      let file = this.makeFile([]);
+      let file = this.makeFile([], this.styleID);
       this.sendTheRequest(file);
     // }else{
       // window.alert("Inputs required");
     // }
   }
 
-  makeFile(data: any){
+  makeFile(data: any, id: any){
     if(data == null){
       data = [];
     }
     Object.keys(this.form.controls).forEach(key => {
-      this.btnStyles.forEach(btn => {
+      this.btnStyles[id].forEach(btn => {
         if(btn.field == key){
           btn.value = this.form.get(key)?.value;
-        }
-        if(key == "user_id"){
-          this.userID = String(this.form.get(key)?.value);
-        }
-        if(key == "screen_id"){
-          this.screenID = this.form.get(key)?.value;
-        }
-        if(key == "app_id"){
-          this.appID = String(this.form.get(key)?.value);
         }
       });
     });
@@ -398,63 +388,26 @@ export class AppComponent implements OnInit, OnChanges{
   download(saveLocation: any){
     let a = document.createElement("a");
     Object.keys(this.form.controls).forEach(key => {
-      this.btnStyles.forEach(btn => {
-        if(btn.field == key){
+      this.btnStyles[this.styleID].forEach(btn => {
+        if(btn.field === "icon"){
+          btn.value = this.svgPath;
+        } else if(btn.field == key){
           btn.value = this.form.get(key)?.value;
-        }
-        if(key == "user_id"){
-          this.userID = String(this.form.get(key)?.value)
-        }
-        if(key == "screen_id"){
-          this.screenID = this.form.get(key)?.value
-        }
-        if(key == "app_id"){
-          this.appID = String(this.form.get(key)?.value)
         }
       });
     });
     let downloadArray = this.btnStyles.slice();
-    downloadArray.push(
-      {
-        field: "user_id",
-        name: "User ID",
-        type: "Number",
-        required: true,
-        value: this.userID
-      },
-      {
-        field: "screen_id",
-        name: "Screen ID",
-        type: "String",
-        required: true,
-        value: this.screenID
-      },
-      {
-        field: "icon",
-        name: "Icon",
-        type: "SVG Path",
-        required: false,
-        value: this.svgPath
-      },
-      {
-        field: "app_id",
-        name: "APP ID",
-        type: "Number",
-        required: true,
-        value: this.appID
-      },
-    );
-    let file = new Blob([JSON.stringify(downloadArray)], {type: 'text/plain'});
+    let file = new Blob([JSON.stringify(downloadArray, null, 2)], {type: 'text/plain'});
 
     let filename: any;
-    if(saveLocation === "downloadAs"){
-      filename = window.prompt('Please enter a name for your file', 'sample');
-      if(!filename){
-        filename = "list"
-      }
-    }else if (saveLocation === "download"){
-      filename = "list";
+    // if(saveLocation === "downloadAs"){
+    filename = window.prompt('Please enter a name for your file', 'sample');
+    if(!filename){
+      filename = "list"
     }
+    // else if (saveLocation === "download"){
+    //   filename = "list";
+    // }
     a.href = URL.createObjectURL(file);
     a.download =  filename+".txt";
     a.click();
@@ -504,7 +457,11 @@ export class AppComponent implements OnInit, OnChanges{
   clearOpen(array: any){
     if (confirm('Are you sure you want to clear and open a new file?')) {
       this.form.reset;
-      this.setData(array);
+      this.btnStyles = array;
+      this.styleID = this.btnStyles.length - 1;
+      this.totalStyleNum = this.btnStyles.length;
+      this.currentStyleNum = this.btnStyles.length;
+      this.setData(this.btnStyles[this.styleID]);
     } else {
       this.menuVis = false;
     }
@@ -515,11 +472,26 @@ export class AppComponent implements OnInit, OnChanges{
       Object.keys(this.form.controls).forEach(key => {
         if(e.field === "icon"){
           this.svgPath = e.value;
+        } else if (e.field === "bg_color"){
+          this.colorBG = e.value;
+          this.form.setControl(e.field, this.fb.control(e.value, Validators.required));
+        }  else if (e.field === "border_color"){
+          this.colorBorder = e.value;
+          this.form.setControl(e.field, this.fb.control(e.value, Validators.required));
+        }  else if (e.field === "icon_bgcolor"){
+          this.colorIcon = e.value;
+          this.form.setControl(e.field, this.fb.control(e.value, Validators.required));
+        }  else if (e.field === "textcolor"){
+          this.colorTxt = e.value;
+          this.form.setControl(e.field, this.fb.control(e.value, Validators.required));
+        } else if (e.field === "icon"){
+          this.svgPath = e.value;
         }else{
           this.form.setControl(e.field, this.fb.control(e.value, Validators.required));
         }
       });
    });
+   this.ref.detectChanges();
   }
 
   isRadio(btn: any){
@@ -568,9 +540,6 @@ export class AppComponent implements OnInit, OnChanges{
     }
   }
 
-  web(data: any){
-  }
-
   sendRequest(data: any) {
     if (!this.ws || this.ws.readyState != WebSocket.OPEN) {
       console.log("url: " + this.url);
@@ -601,6 +570,48 @@ export class AppComponent implements OnInit, OnChanges{
           this.form.setControl("callback", this.fb.control(button_callback, Validators.required));
           this.form.setControl("cell_id", this.fb.control(button_callback, Validators.required));
         }
+        if(JSON.parse(evt.data).method === "chatMenuCallback" && this.autoReply == true){
+          let user_ID = String(JSON.parse(evt.data).chatMenuCallback.chat.id);
+          let screen_ID = JSON.parse(evt.data).chatMenuCallback.menu_ref;
+          let app_id = String(JSON.parse(evt.data).chatMenuCallback.app_id);
+          let button_callback = JSON.parse(evt.data).chatMenuCallback.button_callback;
+          let btnData = JSON.parse(evt.data).chatMenuCallback.button_data;
+          Object.keys(this.form.controls).forEach(key => {
+            this.btnStyles[this.styleID].forEach(btn => {
+              if(btn.field === "icon"){
+                btn.value = this.svgPath;
+              } else if(btn.field == key){
+                btn.value = this.form.get(key)?.value;
+              }
+            });
+          });
+          console.log(btnData);
+          this.btnStyles.forEach((style: any) => {
+            let userPass = false;
+            let screenPass = false;
+            let appPass = false;
+            let cellPass = false;
+            let callbackPass = false;
+            if(style.find((res: any) => res.field === "user_id").value == user_ID || style.find((res: any) => res.field === "user_id").value == null){
+              userPass = true;
+            }
+            if(style.find((res: any) => res.field === "screen_id").value == screen_ID || style.find((res: any) => res.field === "screen_id").value == null){
+              screenPass = true;
+            }
+            if(style.find((res: any) => res.field === "app_id").value == app_id || style.find((res: any) => res.field === "app_id").value == null){
+              appPass = true;
+            }
+            if(style.find((res: any) => res.field === "cell_id").value == button_callback || style.find((res: any) => res.field === "cell_id").value == null){
+              cellPass = true;
+            }
+            if(style.find((res: any) => res.field === "callback").value == button_callback || style.find((res: any) => res.field === "callback").value == null){
+              callbackPass = true;
+            }
+            if(userPass && screenPass && appPass && cellPass && callbackPass){
+              this.sendTheRequest(this.makeFile(btnData, this.btnStyles.indexOf(style)));
+            }
+          });
+        }
       });
       this.ws.addEventListener('close', (evt: any) => {
         this.status = "Disconnected";
@@ -624,9 +635,294 @@ export class AppComponent implements OnInit, OnChanges{
     this.serverReply = "";
   }
 
+  clearTxtArea() {
+    (document.getElementById("txtarea") as HTMLTextAreaElement)!.value = "";
+  }
+
   autoFillToggle(){
     this.autoFill = !this.autoFill;
     console.log(this.autoFill);
+  }
+
+  autoReplyToggle(){
+    this.autoReply = !this.autoReply;
+    console.log(this.autoReply);
+  }
+
+  newStyle(){
+    this.btnStyles.push(
+      [
+        {
+          field: "user_id",
+          name: "User ID",
+          type: "String",
+          value: null
+        },
+        {
+          field: "screen_id",
+          name: "Screen ID",
+          type: "String",
+          value: null
+        },
+        {
+          field: "app_id",
+          name: "App ID",
+          type: "String",
+          value: null
+        },
+        {
+          field: "callback",
+          name: "Callback",
+          type: "String",
+          value: null
+        },
+        {
+          field: "next_screen",
+          name: "Next Screen",
+          type: "Menu",
+          value: null
+        },
+        {
+          field: "span",
+          name: "Span",
+          type: "Number",
+          value: null
+        },
+        {
+          field: "order",
+          name: "Order",
+          type: "Number",
+          value: null
+        },
+        {
+          field: "textcolor",
+          name: "Text Color",
+          type: "Color",
+          value: null
+        },
+        {
+          field: "bg_color",
+          name: "Background Color",
+          type: "Color",
+          value: null
+        },
+        {
+          field: "label",
+          name: "Label",
+          type: "String",
+          value: null
+        },
+        {
+          field: "url",
+          name: "URL",
+          type: "String",
+          value: null
+        },
+        {
+          field: "query",
+          name: "Query",
+          type: "String",
+          value: null
+        },
+        {
+          field: "cell_id",
+          name: "Cell ID",
+          type: "String",
+          value: null
+        },
+        {
+          field: "type",
+          name: "Type",
+          type: "String",
+          value: null
+        },
+        {
+          field: "keyboard",
+          name: "Keyboard",
+          type: "String",
+          value: null
+        },
+        {
+          field: "button-form_type",
+          name: "Button-Form Type",
+          type: "String",
+          value: null
+        },
+        {
+          field: "style",
+          name: "Style",
+          type: "String",
+          value: null
+        },
+        {
+          field: "cache",
+          name: "Cache",
+          type: "Radio",
+          value: null
+        },
+        {
+          field: "value",
+          name: "Value",
+          type: "String",
+          value: null
+        },
+        {
+          field: "hint",
+          name: "Hint",
+          type: "String",
+          value: null
+        },
+        {
+          field: "sublabel",
+          name: "Sub-Label",
+          type: "String",
+          value: null
+        },
+        {
+          field: "format",
+          name: "Format",
+          type: "String",
+          value: null
+        },
+        {
+          field: "start_date",
+          name: "Start Date",
+          type: "Date",
+          value: null
+        },
+        {
+          field: "end_date",
+          name: "End Date",
+          type: "Date",
+          value: null
+        },
+        {
+          field: "age_verification",
+          name: "Age Verification",
+          type: "Number",
+          value: null
+        },
+        {
+          field: "past_date",
+          name: "Past Date",
+          type: "Radio",
+          value: null
+        },
+        {
+          field: "future_date",
+          name: "Future Date",
+          type: "Radio",
+          value: null
+        },
+        {
+          field: "list_option",
+          name: "Button List Option",
+          type: "String",
+          value: null
+        },
+        {
+          field: "list_option_selection",
+          name: "Button List Option Selection",
+          type: "Array",
+          value: null
+        },
+        {
+          field: "min_value",
+          name: "Minimum Value",
+          type: "Number",
+          value: null
+        },
+        {
+          field: "max_value",
+          name: "Maximum Value",
+          type: "Number",
+          value: null
+        },
+        {
+          field: "step_value",
+          name: "Step Value",
+          type: "Number",
+          value: null
+        },
+        {
+          field: "icon_bgcolor",
+          name: "Icon Background Color",
+          type: "Color",
+          value: null
+        },
+        {
+          field: "border_color",
+          name: "Border Color",
+          type: "Color",
+          value: null
+        },
+        {
+          field: "icon",
+          name: "Icon",
+          type: "SVG Path",
+          value: null
+        }
+      ]
+    )
+    Object.keys(this.form.controls).forEach(key => {
+      this.btnStyles[this.styleID].forEach(btn => {
+        if(btn.field === "icon"){
+          btn.value = this.svgPath;
+        } else if(btn.field == key){
+          btn.value = this.form.get(key)?.value;
+        }
+      });
+    });
+    this.styleID = this.btnStyles.length - 1;
+    this.totalStyleNum++;
+    this.currentStyleNum = this.btnStyles.length;
+    this.form.reset();
+    this.setData(this.btnStyles[this.styleID]);
+    this.colorBG = "#362f2f";
+    this.colorTxt = "#ffffff";
+    this.colorIcon = "#38b3df";
+    this.colorBorder = "#ffffff";
+    this.form.setControl("bg_color", this.fb.control("#362f2f", Validators.required));
+    this.form.setControl("border_color", this.fb.control("#ffffff", Validators.required));
+    this.form.setControl("icon_bgcolor", this.fb.control("#38b3df", Validators.required));
+    this.form.setControl("textcolor", this.fb.control("#ffffff", Validators.required));
+    this.svgPath = { name: "ic_assignment_24dp" };
+  }
+
+  nextStyle(){
+    if(this.styleID < this.btnStyles.length - 1){
+      Object.keys(this.form.controls).forEach(key => {
+        this.btnStyles[this.styleID].forEach(btn => {
+          if(btn.field === "icon"){
+            btn.value = this.svgPath;
+          } else if(btn.field == key){
+            btn.value = this.form.get(key)?.value;
+          }
+        });
+      });
+      this.styleID++;
+      this.currentStyleNum = this.styleID + 1;
+      this.form.reset();
+      this.setData(this.btnStyles[this.styleID]);
+    }
+  }
+
+  backStyle(){
+    if(this.styleID > 0){
+      Object.keys(this.form.controls).forEach(key => {
+        this.btnStyles[this.styleID].forEach(btn => {
+          if(btn.field === "icon"){
+            btn.value = this.svgPath;
+          } else if(btn.field == key){
+            btn.value = this.form.get(key)?.value;
+          }
+        });
+      });
+      this.styleID--;
+      this.currentStyleNum = this.styleID + 1;
+      this.form.reset();
+      this.setData(this.btnStyles[this.styleID]);
+    }
   }
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   MOBILE_TYPES = {
@@ -634,7 +930,7 @@ export class AppComponent implements OnInit, OnChanges{
     IOS: 'IOS'
   }
   @Input() disabled = false;
-  svgPath: any =     {  name: "ic_assignment_24dp" };;
+  svgPath: any = { name: "ic_assignment_24dp" };
   postFooterName = [
     'ic_comment',
     'ic_comment_box',
