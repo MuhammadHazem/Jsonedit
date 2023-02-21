@@ -415,10 +415,12 @@ img.Logo-Copy-3 {
 
 .forwardBtn:hover{
   background-image: url("/assets/chevronArrowS.png");
+  cursor: pointer;
 }
 
 .backwardBtn:hover{
   background-image: url("/assets/chevronArrowS.png");
+  cursor: pointer;
 }
 
 .UID-label{
