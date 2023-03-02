@@ -33,6 +33,22 @@
         Submit
       </span>
     </button>
+    <div class="switchAPI">
+      <span class="header_txt">Old API</span>
+      <label
+        class="switch-mobile-type"
+      >
+        <input
+          #roleSelectors
+          type="checkbox"
+          [checked]="false"
+          (change)="APIVersionToggle($event)"
+        />
+
+        <span class="slider round"></span>
+      </label>
+      <span class="header_txt">New API</span>
+    </div>
   </div>
   <div class="content">
     <div class="input-container">
@@ -78,6 +94,12 @@
               Auto-reply:
             </span>
             <input type="checkbox" class="autoReply-cb" (click)="autoReplyToggle()">
+          </div>
+          <div class="row">
+            <span class="disableNotif-label">
+              Disable Notification:
+            </span>
+            <input type="checkbox" class="disableNotif-cb" (click)="notifToggle()">
           </div>
         </div>
         <div class="setting-container">

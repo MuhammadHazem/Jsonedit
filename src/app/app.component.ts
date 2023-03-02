@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnChanges{
   url: any = "wss://d1.nandbox.net:5020/nandbox/api/";
   serverReply = "";
   status = "Disconnected";
+  APIVersion = "oldAPI";
   buttonData: any;
   serverReplyData: any;
   ws: any;
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit, OnChanges{
   appID: any;
   autoFill = false;
   autoReply = false;
+  disableNotif = false;
   currentStyleNum = 1;
   totalStyleNum = 1;
   container: any;
@@ -336,32 +338,64 @@ export class AppComponent implements OnInit, OnChanges{
         }
       });
     });
-    let btnData: any = {};
-    Object.keys(this.form.controls).forEach(key => {
-      let value = this.form.get(key)!.value;
-      if(value == ''){
-        value = null;
-      }
-      if(value != null && key != "user_id" && key != "app_id" && key != "screen_id"){
-        btnData[key] = value;
-      }
-    });
-    btnData["icon"] = this.svgPath.name;
-    this.btnjson = data;
-    this.btnjson.push(btnData);
-    let file = JSON.stringify(
-      {
-        method: "setWorkflow",
-        user_id: String(this.userID),
-        screen_id: this.screenID,
-        cell_id: this.form.controls["cell_id"].value,
-        app_id: String(this.appID),
-        message: "",
-        type: null,
-        workflow_cell: this.btnjson,
-        reference: 123456789
-      }
-    )
+    let file: any
+    if(this.APIVersion === "oldAPI"){
+      let btnData: any = {};
+      Object.keys(this.form.controls).forEach(key => {
+        let value = this.form.get(key)!.value;
+        if(value == ''){
+          value = null;
+        }
+        if(value != null && key != "user_id" && key != "app_id" && key != "screen_id"){
+          btnData[key] = value;
+        }
+      });
+      btnData["icon"] = this.svgPath.name;
+      this.btnjson = data;
+      this.btnjson.push(btnData);
+      file = JSON.stringify(
+        {
+          method: "setWorkflow",
+          user_id: String(this.form.controls["user_id"].value),
+          screen_id: this.form.controls["screen_id"].value,
+          cell_id: this.form.controls["cell_id"].value,
+          app_id: String(this.form.controls["app_id"].value),
+          message: "",
+          type: null,
+          workflow_cell: this.btnjson,
+          reference: 123456789
+        }
+      )
+    } else if(this.APIVersion === "newAPI"){
+      let btnData: any = {};
+      Object.keys(this.form.controls).forEach(key => {
+        let value = this.form.get(key)!.value;
+        if(value == ''){
+          value = null;
+        }
+        let newAPIObjects = ["cell_id","callback", "api_id", "cache", "next_screen", "url", "bg_color", "label", "label_color", "sublabel", "sublabel_color", "hint", "value"];
+        if(value != null && (newAPIObjects.includes(key) || key === "text_color")){
+          if(key === "text_color"){
+            btnData["sublabel_color"] = value;
+            btnData["label_color"] = value;
+          } else {
+            btnData[key] = value;
+          }
+        }
+      });
+      this.btnjson = data;
+      this.btnjson.push(btnData);
+      file = JSON.stringify(
+        {
+          method: "setWorkflow",
+          user_id: String(this.form.controls["user_id"].value),
+          screen_id: this.form.controls["screen_id"].value,
+          workflow_cell: this.btnjson,
+          reference: 123456789,
+          disable_notification: this.disableNotif
+        }
+      )
+    }
     return file;
   }
 
@@ -559,7 +593,13 @@ export class AppComponent implements OnInit, OnChanges{
         this.serverReply += "\n" + evt.data + "\n";
         this.ref.detectChanges();
         console.log(this.autoFill);
-        if(JSON.parse(evt.data).method === "chatMenuCallback" && this.autoFill == true){
+        let methodVersion: any;
+        if(this.APIVersion === "oldAPI"){
+          methodVersion = "chatMenuCallback";
+        } else if(this.APIVersion === "newAPI"){
+          methodVersion = "WorkflowCell";
+        }
+        if(JSON.parse(evt.data).method === methodVersion && this.autoFill == true){
           let user_ID = String(JSON.parse(evt.data).chatMenuCallback.chat.id);
           let screen_ID = JSON.parse(evt.data).chatMenuCallback.menu_ref;
           let app_id = String(JSON.parse(evt.data).chatMenuCallback.app_id);
@@ -570,7 +610,7 @@ export class AppComponent implements OnInit, OnChanges{
           this.form.setControl("callback", this.fb.control(button_callback, Validators.required));
           this.form.setControl("cell_id", this.fb.control(button_callback, Validators.required));
         }
-        if(JSON.parse(evt.data).method === "chatMenuCallback" && this.autoReply == true){
+        if(JSON.parse(evt.data).method === methodVersion && this.autoReply == true){
           let user_ID = String(JSON.parse(evt.data).chatMenuCallback.chat.id);
           let screen_ID = JSON.parse(evt.data).chatMenuCallback.menu_ref;
           let app_id = String(JSON.parse(evt.data).chatMenuCallback.app_id);
@@ -647,6 +687,20 @@ export class AppComponent implements OnInit, OnChanges{
   autoReplyToggle(){
     this.autoReply = !this.autoReply;
     console.log(this.autoReply);
+  }
+
+  notifToggle(){
+    this.disableNotif = !this.disableNotif;
+    console.log(this.disableNotif);
+  }
+
+  APIVersionToggle(e: any){
+    if(e.target.checked === true){
+      this.APIVersion = "newAPI";
+    } else if(e.target.checked === false){
+      this.APIVersion = "oldAPI";
+    }
+    console.log("api",this.APIVersion);
   }
 
   newStyle(){
