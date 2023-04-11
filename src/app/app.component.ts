@@ -302,6 +302,7 @@ export class AppComponent implements OnInit, OnChanges{
     // });
   }
 
+  //submit button pressed sends data
   submitStyles(){
     console.log("Submit");
     // let fulfilled = true;
@@ -327,6 +328,7 @@ export class AppComponent implements OnInit, OnChanges{
     // }
   }
 
+  //compile data to be sent to server as an object
   makeFile(data: any, id: any){
     if(data == null){
       data = [];
@@ -399,26 +401,25 @@ export class AppComponent implements OnInit, OnChanges{
     return file;
   }
 
+  //for color selector change
   onChangeTxtColor(e: any){
     this.colorTxt = e;
     this.form.setControl("textcolor", this.fb.control(e, Validators.required));
   }
-
   onChangeBgColor(e: any){
     this.colorBG = e;
     this.form.setControl("bg_color", this.fb.control(e, Validators.required));
   }
-
   onChangeIconBgColor(e: any){
     this.colorIcon = e;
     this.form.setControl("icon_bgcolor", this.fb.control(e, Validators.required));
   }
-
   onChangeBorderColor(e: any){
     this.colorBorder = e;
     this.form.setControl("border_color", this.fb.control(e, Validators.required));
   }
 
+  //download the data/workflow currently saved
   download(saveLocation: any){
     let a = document.createElement("a");
     Object.keys(this.form.controls).forEach(key => {
@@ -448,6 +449,7 @@ export class AppComponent implements OnInit, OnChanges{
     this.menuVis = false;
   }
 
+  //open workflow file and load data
   handleFileInput(e: any) {
     this.file = (e.target as HTMLInputElement)!.files!.item(0);
     let reader = new FileReader();
@@ -461,6 +463,7 @@ export class AppComponent implements OnInit, OnChanges{
     this.menuVis = false;
   }
 
+  //show/hide file menu
   showHide(){
     if (this.menuVis == false){
       this.menuVis = true;
@@ -488,6 +491,7 @@ export class AppComponent implements OnInit, OnChanges{
     }
   }
 
+  //clear data and open a new file and extract data from it, then sets that data
   clearOpen(array: any){
     if (confirm('Are you sure you want to clear and open a new file?')) {
       this.form.reset;
@@ -500,7 +504,6 @@ export class AppComponent implements OnInit, OnChanges{
       this.menuVis = false;
     }
   }
-
   setData(array: any){
     array.forEach((e: any) => {
       Object.keys(this.form.controls).forEach(key => {
@@ -528,6 +531,7 @@ export class AppComponent implements OnInit, OnChanges{
    this.ref.detectChanges();
   }
 
+  //for input data types
   isRadio(btn: any){
     if(btn.type == "Radio"){
       return true;
@@ -553,6 +557,7 @@ export class AppComponent implements OnInit, OnChanges{
     return false;
   }
 
+  //authenticate the websocket connection when button pressed
   authenticate(){
     if(!this.authbtnDisabled){
       let tokenInput: any = document.getElementById('auth');
@@ -566,6 +571,7 @@ export class AppComponent implements OnInit, OnChanges{
     }
   }
 
+  //disables authenticate button if token or url not inputted
   isAuthDisabled(tokenInput: any, urlInput: any){
     if(tokenInput && urlInput){
       this.authbtnDisabled = false;
@@ -574,6 +580,7 @@ export class AppComponent implements OnInit, OnChanges{
     }
   }
 
+  //sends the data to request, auto-responds and auto-fills if feature selected
   sendRequest(data: any) {
     if (!this.ws || this.ws.readyState != WebSocket.OPEN) {
       console.log("url: " + this.url);
@@ -662,7 +669,6 @@ export class AppComponent implements OnInit, OnChanges{
       });
     }
   }
-
   sendTheRequest(data: string) {
     console.log("sending request " + data);
     if (!this.ws || this.ws.readyState != WebSocket.OPEN){
@@ -671,29 +677,27 @@ export class AppComponent implements OnInit, OnChanges{
     this.ws.send(data);
   }
 
+  //clears txt for areas name specified
   clearReply() {
     this.serverReply = "";
   }
-
   clearTxtArea() {
     (document.getElementById("txtarea") as HTMLTextAreaElement)!.value = "";
   }
 
+  //toggle functions
   autoFillToggle(){
     this.autoFill = !this.autoFill;
     console.log(this.autoFill);
   }
-
   autoReplyToggle(){
     this.autoReply = !this.autoReply;
     console.log(this.autoReply);
   }
-
   notifToggle(){
     this.disableNotif = !this.disableNotif;
     console.log(this.disableNotif);
   }
-
   APIVersionToggle(e: any){
     if(e.target.checked === true){
       this.APIVersion = "newAPI";
@@ -703,6 +707,7 @@ export class AppComponent implements OnInit, OnChanges{
     console.log("api",this.APIVersion);
   }
 
+  //for reseting style variable to default
   newStyle(){
     this.btnStyles.push(
       [
@@ -943,6 +948,7 @@ export class AppComponent implements OnInit, OnChanges{
     this.svgPath = { name: "ic_assignment_24dp" };
   }
 
+  //switching to next sytle(workflow) if there is
   nextStyle(){
     if(this.styleID < this.btnStyles.length - 1){
       Object.keys(this.form.controls).forEach(key => {
@@ -961,6 +967,7 @@ export class AppComponent implements OnInit, OnChanges{
     }
   }
 
+  //switching to previous style(style) if there is
   backStyle(){
     if(this.styleID > 0){
       Object.keys(this.form.controls).forEach(key => {
@@ -978,7 +985,7 @@ export class AppComponent implements OnInit, OnChanges{
       this.setData(this.btnStyles[this.styleID]);
     }
   }
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------Icon selector related objects and functions----------------------------------------------------------------------------------
   MOBILE_TYPES = {
     ANDROID: 'Android',
     IOS: 'IOS'
