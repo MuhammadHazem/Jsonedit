@@ -604,7 +604,7 @@ export class AppComponent implements OnInit, OnChanges{
         if(this.APIVersion === "oldAPI"){
           methodVersion = "chatMenuCallback";
         } else if(this.APIVersion === "newAPI"){
-          methodVersion = "WorkflowCell";
+          methodVersion = "chatMenuCallback";
         }
         if(JSON.parse(evt.data).method === methodVersion && this.autoFill == true){
           let user_ID = String(JSON.parse(evt.data).chatMenuCallback.chat.id);
