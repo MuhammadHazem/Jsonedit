@@ -2300,6 +2300,118 @@ input:checked + .slider:before {
   }
 }
 
+.lineInput{
+  width: 481px;
+  height: 168px;
+  border-radius: 12px;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+}
+
+.nodeInputHeader{
+  width: 481px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  background-color: #25adf0;
+}
+
+.nodeInputHeaderTxt{
+  width: 260px;
+  font-family: Roboto;
+  font-size: 17px;
+  font-weight: 400;
+  color: #fff;
+  margin-left: 18px;
+  margin-right: 164px;
+}
+
+.nodeInputsLine{
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: solid 1px #d4dbe2;
+}
+
+.nodeInputLabel{
+  width: 160px;
+  display: inline-block;
+  margin: 20px 0 0 18px;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d2d2d;
+}
+
+.nodeInput-input{
+  width: 270px;
+  height: 35px;
+  margin: 13px 0 0 0;
+  border-radius: 3px;
+  border: solid 1px #d5d7e0;
+  font-family: Roboto;
+  font-size: 13px;
+  padding-left: 12px;
+}
+
+.nodeInput-input::placeholder{
+  color: #bec2d4;
+}
+
+.nodeInput-input:focus{
+  outline: none;
+  border-color:#26b2f6;
+  caret-color: #26b2f6;
+}
+
+.lineInputButtons{
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.cancelButton{
+  width: 70px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 4px;
+  border-radius: 16.5px;
+  border: solid 2px #d8d8d8;
+  background-color: #fff;
+}
+
+.cancelButtonTxt{
+  font-family: Roboto;
+  font-size: 14px;
+  color: #b5b5b5;
+}
+
+.submitButton{
+  width: 70px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 12px 0 4px;
+  border-radius: 16.5px;
+  border: solid 1.5px #25adf0;
+  background-color: #25adf0;
+}
+
+.submitButtonTxt{
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+}
+
 // :host{
 
   // body{

@@ -592,6 +592,52 @@
   </div>
 </div>
 
+<app-modal-container *ngIf="valueNum">
+  <div class="lineInput">
+    <div class="nodeInputHeader">
+      <span class="nodeInputHeaderTxt">Add Values</span>
+      <img src="/assets/cancelBlue.png" (click)="closeReset()"/>
+    </div>
+    <div class="nodeInputsLine">
+      <div class="nodeInput">
+        <span class="nodeInputLabel">Number of Value Objects:</span>
+        <input id="numValues" #lineLabel class="nodeInput-input" type="number" placeholder="Please enter number of value objects" onclick="this.value = '';">
+      </div>
+    </div>
+    <div class="lineInputButtons">
+      <button class="cancelButton" type="button" (click)="closeReset();">
+        <span class="cancelButtonTxt">Cancel</span>
+      </button>
+      <button class="submitButton" type="submit" (click)="makeValueObjects()">
+        <span class="submitButtonTxt">Add</span>
+      </button>
+    </div>
+  </div>
+</app-modal-container>
+
+<app-modal-container *ngIf="optionNum">
+  <div class="lineInput">
+    <div class="nodeInputHeader">
+      <span class="nodeInputHeaderTxt">Add Options</span>
+      <img src="/assets/cancelBlue.png" (click)="closeReset()"/>
+    </div>
+    <div class="nodeInputsLine">
+      <div class="nodeInput">
+        <span class="nodeInputLabel">Number of Option Objects:</span>
+        <input id="numOptions" #lineLabel class="nodeInput-input" type="number" placeholder="Please enter number of option objects" onclick="this.value = '';">
+      </div>
+    </div>
+    <div class="lineInputButtons">
+      <button class="cancelButton" type="button" (click)="closeReset();">
+        <span class="cancelButtonTxt">Cancel</span>
+      </button>
+      <button class="submitButton" type="submit" (click)="makeOptionObjects()">
+        <span class="submitButtonTxt">Add</span>
+      </button>
+    </div>
+  </div>
+</app-modal-container>
+
 <app-modal-container *ngIf="viewValue">
   <div class="viewValueBlock">
     <div class="viewValueHeader">

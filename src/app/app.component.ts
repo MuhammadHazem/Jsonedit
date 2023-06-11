@@ -29,7 +29,9 @@ export class AppComponent {
   autoReply = false;
   disableNotif = false;
   viewValue = false;
+  valueNum = false;
   viewOption = false;
+  optionNum = false;
   valList: any;
   optionList: any;
   currentStyleNum = 1;
@@ -441,12 +443,28 @@ export class AppComponent {
   }
 
   openValue(){
-    let values = JSON.parse(this.form.get("value")?.value);
-    if(values){
-      this.valList = values;
+    let val = this.form.get("value")?.value;
+    if(val){
+      let values = JSON.parse(val);
+      if(values && values.length > 0){
+        this.valList = values;
+        this.viewValue = true;
+      } else {
+        this.valueNum = true;
+      }
     } else {
-      this.valList = [];
+      this.valueNum = true;
     }
+
+  }
+
+  makeValueObjects(){
+    this.valList = [];
+    let num = (document.getElementById("numValues") as any)!.value;
+    for(let i = 0; i < num; i++){
+      this.valList.push({"option_id": "" , "value": ""});
+    }
+    this.valueNum = false;
     this.viewValue = true;
   }
 
@@ -477,16 +495,28 @@ export class AppComponent {
   }
 
   openOption(){
-    let options = JSON.parse(this.form.get("option")?.value);
-    if(options){
-      this.optionList = options;
+    let op = this.form.get("option")?.value;
+    if(op){
+      let options = JSON.parse(op);
+      if(options && options.length > 0){
+        this.optionList = options;
+        this.viewOption = true;
+      } else {
+        this.optionNum = true;
+      }
     } else {
-      this.optionList = [];
+      this.optionNum = true;
     }
-    this.viewOption = true;
-    for(let i = 0; i < this.optionList.length; i++){
+  }
 
+  makeOptionObjects(){
+    this.optionList = [];
+    let num = (document.getElementById("numOptions") as any)!.value;
+    for(let i = 0; i < num; i++){
+      this.optionList.push({"option_id": "", "label": "", "sublable": "", "image": "", "icon": ""});
     }
+    this.optionNum = false;
+    this.viewOption = true;
   }
 
   changeOption(){
@@ -528,6 +558,8 @@ export class AppComponent {
   closeReset(){
     this.viewValue = false;
     this.viewOption = false;
+    this.valueNum = false;
+    this.optionNum = false;
   }
 
   //download the data/workflow currently saved
