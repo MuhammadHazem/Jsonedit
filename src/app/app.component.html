@@ -412,7 +412,10 @@
             <span class="value-label">
               Value:
             </span>
-            <input type="text" class="value-input" formControlName="value" placeholder="Please enter value">
+            <div class="value-container">
+              <input type="text" class="value-input" formControlName="value" placeholder="Please enter value">
+              <button class="view-value" (click)="openValue()">Enter</button>
+            </div>
             <span class="DB-label">
               DB:
             </span>
@@ -424,6 +427,15 @@
             <span class="DB-false-label">
               False
             </span>
+          </div>
+          <div class="row">
+            <span class="option-label">
+              Option:
+            </span>
+            <div class="option-container">
+              <input type="text" class="option-input" formControlName="option" placeholder="Please enter option">
+              <button class="view-option" (click)="openOption()">Enter</button>
+            </div>
           </div>
         </div>
         <div class="action-container">
@@ -579,6 +591,74 @@
     </div>
   </div>
 </div>
+
+<app-modal-container *ngIf="viewValue">
+  <div class="viewValueBlock">
+    <div class="viewValueHeader">
+      <span class="viewValueHeaderTxt">Value</span>
+      <img class="cancel" src="/assets/cancel.png" (click)="closeReset()"/>
+    </div>
+    <div class="values-container">
+      <div class="value" *ngFor="let val of valList; index as l">
+        <span class="viewValue-label">
+          Value:
+        </span>
+        <input type="text" class="viewValue-input" id="value_{{l}}_value" value={{val.value}} placeholder="Please enter value">
+        <span class="viewValue-label">
+          ID:
+        </span>
+        <input type="text" class="viewValue-input" id="value_{{l}}_id" value={{val.option_id}} placeholder="Please enter value">
+        <div class="garbageValue" (click)="disposeValue(l)"></div>
+      </div>
+      <span class="addNewValue" (click)="addValue()">Add Option</span>
+    </div>
+    <div class="viewValueButtons">
+      <button class="saveButton" type="button" (click)="changeValue();">
+        Save
+      </button>
+    </div>
+  </div>
+</app-modal-container>
+
+<app-modal-container *ngIf="viewOption">
+  <div class="viewOptionBlock">
+    <div class="viewOptionHeader">
+      <span class="viewOptionHeaderTxt">Option</span>
+      <img class="cancel" src="/assets/cancel.png" (click)="closeReset()"/>
+    </div>
+    <div class="options-container">
+      <div class="option" *ngFor="let option of optionList; index as l">
+        <span class="viewOption-label">
+          Option ID:
+        </span>
+        <input type="text" class="viewOption-input" id="option_{{l}}_id" value={{option.option_id}} placeholder="Please enter value">
+        <span class="viewOption-label">
+          Label:
+        </span>
+        <input type="text" class="viewOption-input" id="option_{{l}}_label" value={{option.label}} placeholder="Please enter value">
+        <span class="viewOption-label">
+          Sublabel:
+        </span>
+        <input type="text" class="viewOption-input" id="option_{{l}}_sublable" value={{option.sublable}} placeholder="Please enter value">
+        <span class="viewOption-label">
+          Icon:
+        </span>
+        <app-option-icon id="option_{{l}}_icon" (svgNotify)="asignIcon($event, l) " [iconName]="optionList[l].icon"></app-option-icon>
+        <span class="viewOption-label">
+          Image:
+        </span>
+        <input type="text" class="viewOption-input" id="option_{{l}}_image" value={{option.image}} placeholder="Please enter value">
+        <div class="garbageOption" (click)="disposeOption(l)"></div>
+      </div>
+      <span class="addNewOption" (click)="addOption()">Add Option</span>
+    </div>
+    <div class="viewOptionButtons">
+      <button class="saveButton" type="button" (click)="changeOption();">
+        Save
+      </button>
+    </div>
+  </div>
+</app-modal-container>
 
 <!-- <div class="menu">
   <div class="menuMain" (click)="showHide()">

@@ -9,12 +9,15 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ColorPickerModule } from 'ngx-color-picker';
-
+import { ModalContainerComponent } from './modal-container/modal-container.component';
+import { OptionIconComponent } from './option-icon/option-icon.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModalContainerComponent,
+    OptionIconComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,104 @@
+// @media (max-width: 1399px) {
+//   margin-right: 3px;
+// }
+
+// @media (min-width: 1400px) {
+//   margin-right: unset;
+// }
+
+.dropdown-menu {
+  width: 250px;
+  border: solid black;
+  padding: 0%;
+  display: none;
+}
+
+.icon-icon2 {
+  fill: black;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-icon {
+  fill: black;
+  width: 18px;
+  height: 18px;
+}
+.open > .dropdown-menu {
+  width: 140%;
+  margin-bottom: 100px;
+  display: flex;
+}
+#dropDownDiv {
+  position: relative;
+  height: 29px;
+  border-radius: 3px;
+}
+.btn-group {
+  display: flex;
+  width: 232px;
+  margin: 9.5px 0 0 11px;
+  position: absolute;
+  z-index: 1000;
+}
+.icon-image {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+}
+.btn-svg {
+  width: 46px;
+  color: #000000;
+  height: 29.5px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border: solid 1px #ded9d9;
+  background-color: #ffff;
+  padding: 2px 0 2px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#button-split {
+  width: 24px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.icon-seactions {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #a4a5a7;
+  background-color: #ffff;
+}
+.sec-seaction {
+  border-right: 1px solid #a4a5a7;
+  border-left: 1px solid #a4a5a7;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.seaction {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.icon-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0 5px 0;
+  max-height: 200px;
+  overflow-y: scroll;
+  background-color: #ffff;
+}
+.icon-element {
+  padding: 5px;
+}
+ul {
+  list-style-type: none;
+}

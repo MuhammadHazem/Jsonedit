@@ -8,7 +8,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AppComponent implements OnInit, OnChanges{
+export class AppComponent {
   title = 'Workflow Cell Test';
   required: any = [];
   menuVis = false;
@@ -28,6 +28,10 @@ export class AppComponent implements OnInit, OnChanges{
   autoFill = false;
   autoReply = false;
   disableNotif = false;
+  viewValue = false;
+  viewOption = false;
+  valList: any;
+  optionList: any;
   currentStyleNum = 1;
   totalStyleNum = 1;
   container: any;
@@ -154,6 +158,12 @@ export class AppComponent implements OnInit, OnChanges{
         value: null
       },
       {
+        field: "option",
+        name: "Option",
+        type: "String",
+        value: null
+      },
+      {
         field: "hint",
         name: "Hint",
         type: "String",
@@ -272,6 +282,7 @@ export class AppComponent implements OnInit, OnChanges{
     "style": new FormControl(null,Validators.required),
     "cache": new FormControl(null,Validators.required),
     "value": new FormControl(),
+    "option": new FormControl(),
     "hint": new FormControl(),
     "sublabel": new FormControl(),
     "format": new FormControl(),
@@ -351,6 +362,16 @@ export class AppComponent implements OnInit, OnChanges{
         if(value != null && key != "user_id" && key != "app_id" && key != "screen_id"){
           btnData[key] = value;
         }
+        if(value != null && key === "value"){
+          console.log(this.form.get(key)?.value);
+          btnData[key] = JSON.parse(value);
+          console.log(btnData[key]);
+        }
+        if(value != null && key === "option"){
+          console.log(this.form.get(key)?.value);
+          btnData[key] = JSON.parse(value);
+          console.log(btnData[key]);
+        }
       });
       btnData["icon"] = this.svgPath.name;
       this.btnjson = data;
@@ -417,6 +438,96 @@ export class AppComponent implements OnInit, OnChanges{
   onChangeBorderColor(e: any){
     this.colorBorder = e;
     this.form.setControl("border_color", this.fb.control(e, Validators.required));
+  }
+
+  openValue(){
+    let values = JSON.parse(this.form.get("value")?.value);
+    if(values){
+      this.valList = values;
+    } else {
+      this.valList = [];
+    }
+    this.viewValue = true;
+  }
+
+  changeValue(){
+    for(let i = 0; i < this.valList.length; i++){
+      let val: any = (document.getElementById("value_"+i+"_value") as any).value;
+      console.log(val);
+      this.valList[i].value = val;
+      let id: any = (document.getElementById("value_"+i+"_id") as any).value;
+      console.log(id);
+      this.valList[i].option_id = id;
+    }
+    if(this.valList.length == 0){
+      this.form.setControl("value", this.fb.control(null, Validators.required));
+    } else {
+      let txt = JSON.stringify(this.valList);
+      this.form.setControl("value", this.fb.control(txt, Validators.required));
+    }
+    this.viewValue = false;
+  }
+
+  addValue(){
+    this.valList.push({"option_id": "" , "value": ""});
+  }
+
+  disposeValue(index: any){
+    this.valList.splice(index, 1);
+  }
+
+  openOption(){
+    let options = JSON.parse(this.form.get("option")?.value);
+    if(options){
+      this.optionList = options;
+    } else {
+      this.optionList = [];
+    }
+    this.viewOption = true;
+    for(let i = 0; i < this.optionList.length; i++){
+
+    }
+  }
+
+  changeOption(){
+    for(let i = 0; i < this.optionList.length; i++){
+      let label: any = (document.getElementById("option_"+i+"_label") as any).value;
+      console.log(label);
+      this.optionList[i].label = label;
+      let sublable: any = (document.getElementById("option_"+i+"_sublable") as any).value;
+      console.log(sublable);
+      this.optionList[i].sublable = sublable;
+      let image: any = (document.getElementById("option_"+i+"_image") as any).value;
+      console.log(image);
+      this.optionList[i].image = image;
+      let id: any = (document.getElementById("option_"+i+"_id") as any).value;
+      console.log(id);
+      this.optionList[i].option_id = id;
+    }
+    if(this.optionList.length == 0){
+      this.form.setControl("option", this.fb.control(null, Validators.required));
+    } else {
+      let txt = JSON.stringify(this.optionList);
+      this.form.setControl("option", this.fb.control(txt, Validators.required));
+    }
+    this.viewOption = false;
+  }
+
+  asignIcon(event: any, index: any){
+    this.optionList[index].icon = event.name;
+  }
+
+  addOption(){
+    this.optionList.push({"option_id": "", "label": "", "sublable": "", "image": "", "icon": ""});
+  }
+
+  disposeOption(index: any){
+    this.optionList.splice(index, 1);
+  }
+
+  closeReset(){
+    this.viewValue = false;
+    this.viewOption = false;
   }
 
   //download the data/workflow currently saved
@@ -822,6 +933,12 @@ export class AppComponent implements OnInit, OnChanges{
         {
           field: "value",
           name: "Value",
+          type: "String",
+          value: null
+        },
+        {
+          field: "option",
+          name: "Option",
           type: "String",
           value: null
         },
@@ -1564,8 +1681,6 @@ export class AppComponent implements OnInit, OnChanges{
   updateMinDate(e: any){
     this.container = e;
   }
-
-
 }
 
 

@@ -161,12 +161,12 @@ img.Logo-Copy-3 {
 
 .content{
   display: flex;
-  height: 1343px;
+  height: 1400px;
 }
 
 .input-container{
   width: 634px;
-  height: 1290.5px;
+  height: 1325.5px;
   margin: 15px 0 0 265.5px;
   padding: 12.5px 11px 13.5px;
   border-radius: 6px;
@@ -545,7 +545,7 @@ img.Logo-Copy-3 {
 
 .cell-container{
   width: 631px;
-  height: 328px;
+  height: 359px;
   margin: 0 0 9.5px;
   border-radius: 4px;
   border: solid 1px #dfe5ea;
@@ -804,7 +804,7 @@ img.Logo-Copy-3 {
   width: 232px;
   margin: 9.5px 0 0 412px;
   position: absolute;
-  z-index: 9999;
+  z-index: 1000;
 }
 .icon-image {
   width: 20px;
@@ -1085,6 +1085,32 @@ ul {
 }
 
 .value-input::placeholder{
+  font-family: Roboto;
+  font-size: 11px;
+  color: #bec2d4;
+}
+
+.option-label{
+  width: 44px;
+  margin: 13.5px 0 0 12px;
+  font-family: Roboto;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #2d2d2d;
+}
+
+.option-input{
+  width: 197px;
+  height: 28.5px;
+  margin: 4.5px 0 0 38.5px;
+  border-radius: 3px;
+  border: solid 1px #d5d7e0;
+  font-family: Roboto;
+  font-size: 11px;
+  padding-left: 9px;
+}
+
+.option-input::placeholder{
   font-family: Roboto;
   font-size: 11px;
   color: #bec2d4;
@@ -1969,14 +1995,316 @@ input:checked + .slider:before {
   color: #172b4d;
   margin: 0 5px;
 }
+
+.value-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.view-value{
+  width: 53px;
+  height: 23.5px;
+  position: absolute;
+  translate: 363% 36%;
+  border-radius: 3px;
+  border: none;
+  color: #ffffff;
+  background-color: #01a1ee;
+  font-size: 11px;
+}
+
+.view-value:active{
+  background-color: #008dce;
+}
+
+.option-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.view-option{
+  width: 53px;
+  height: 23.5px;
+  position: absolute;
+  translate: 361% 36%;
+  border-radius: 3px;
+  border: none;
+  color: #ffffff;
+  background-color: #01a1ee;
+  font-size: 11px;
+}
+
+.view-option:active{
+  background-color: #008dce;
+}
+
+.viewValueBlock{
+  width: 642px;
+  border-radius: 8px;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.viewValueHeader{
+  width: 642px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.viewValueHeaderTxt{
+  width: 260px;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+  margin-left: 22px;
+  margin-right: 312px;
+}
+
+.cancel:hover{
+  cursor: pointer;
+}
+
+.values-container{
+  width: 568px;
+  display: flex;
+  flex-direction: column;
+  padding: 17px 17px 14px 17px;
+  border-radius: 8px;
+  border: solid 1px #d5d7e0;
+}
+
+.value{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.viewValue-input{
+  width: 197px;
+  height: 28.5px;
+  border-radius: 3px;
+  border: solid 1px #d5d7e0;
+  font-family: Roboto;
+  font-size: 11px;
+  padding-left: 9px;
+}
+
+.viewValue-input::placeholder{
+  font-family: Roboto;
+  font-size: 11px;
+  color: #bec2d4;
+}
+
+.viewValue-label{
+  display: flex;
+  justify-content: flex-end;
+  width: 32px;
+  font-family: Roboto;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #2d2d2d;
+}
+
+.viewValueButtons{
+  display: flex;
+  width: 642px;
+  height: 50px;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.garbageValue{
+  width: 32px;
+  height: 32px;
+  background-image: url('/assets/garbage.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.garbageValue:hover{
+  cursor: pointer;
+  background-image: url('/assets/garbageR.png');
+}
+
+.addNewValue{
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 45px 0 0;
+  font-size: 13px;
+  font-family: Roboto;
+  color: #0068ff;
+  text-decoration: underline;
+}
+
+.addNewValue:hover{
+  cursor: pointer;
+}
+
+.saveButton{
+  width: 70px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px 0 0;
+  border-radius: 18px;
+  background-color: #26b2f6;
+  border: solid 1px #fff;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 12px;
+}
+
+.saveButton:hover{
+  cursor: pointer;
+  background-color: #008dce;
+}
+
+.viewOptionBlock{
+  width: 1142px;
+  border-radius: 8px;
+  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.viewOptionHeader{
+  width: 1142px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.viewOptionHeaderTxt{
+  width: 760px;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+  margin-left: 22px;
+  margin-right: 312px;
+}
+
+.options-container{
+  width: 1068px;
+  display: flex;
+  flex-direction: column;
+  padding: 17px 17px 14px 17px;
+  border-radius: 8px;
+  border: solid 1px #d5d7e0;
+}
+
+.option{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.viewOption-input{
+  width: 160px;
+  height: 28.5px;
+  border-radius: 3px;
+  border: solid 1px #d5d7e0;
+  font-family: Roboto;
+  font-size: 11px;
+  padding-left: 9px;
+}
+
+.viewOption-input::placeholder{
+  font-family: Roboto;
+  font-size: 11px;
+  color: #bec2d4;
+}
+
+.viewOption-label{
+  display: flex;
+  justify-content: flex-end;
+  font-family: Roboto;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #2d2d2d;
+}
+
+.viewOptionButtons{
+  display: flex;
+  width: 1042px;
+  height: 50px;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.garbageOption{
+  width: 32px;
+  height: 32px;
+  background-image: url('/assets/garbage.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.garbageOption:hover{
+  cursor: pointer;
+  background-image: url('/assets/garbageR.png');
+}
+
+.addNewOption{
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 45px 0 0;
+  font-size: 13px;
+  font-family: Roboto;
+  color: #0068ff;
+  text-decoration: underline;
+}
+
+.addNewOption:hover{
+  cursor: pointer;
+}
+
+.option{
+  app-option-icon{
+    ::ng-deep .dropdown-menu{
+      inset: 50% auto auto 65% !important;
+      width: 348% !important;
+      position: absolute !important;
+      z-index: 9999 !important;
+    }
+    ::ng-deep .btn-group{
+      position: relative !important;
+      margin: 0 0 0 0 !important;
+      width: auto !important;
+      z-index: auto !important;
+    }
+  }
+}
+
 // :host{
 
-//   .body{
-//     overflow: auto;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//   }
+  // body{
+  //   height: auto;
+  // }
 
 //   .contnent{
 //     border: solid black;
