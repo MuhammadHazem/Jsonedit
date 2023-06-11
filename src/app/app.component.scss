@@ -2066,7 +2066,7 @@ input:checked + .slider:before {
   font-weight: 500;
   color: #000;
   margin-left: 22px;
-  margin-right: 312px;
+  margin-right: 322px;
 }
 
 .cancel:hover{
@@ -2077,6 +2077,7 @@ input:checked + .slider:before {
   width: 568px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   padding: 17px 17px 14px 17px;
   border-radius: 8px;
   border: solid 1px #d5d7e0;
@@ -2140,8 +2141,7 @@ input:checked + .slider:before {
 }
 
 .addNewValue{
-  display: flex;
-  justify-content: flex-end;
+  width: fit-content;
   margin: 8px 45px 0 0;
   font-size: 13px;
   font-family: Roboto;
@@ -2201,13 +2201,14 @@ input:checked + .slider:before {
   font-weight: 500;
   color: #000;
   margin-left: 22px;
-  margin-right: 312px;
+  margin-right: 322px;
 }
 
 .options-container{
   width: 1068px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   padding: 17px 17px 14px 17px;
   border-radius: 8px;
   border: solid 1px #d5d7e0;
@@ -2270,8 +2271,7 @@ input:checked + .slider:before {
 }
 
 .addNewOption{
-  display: flex;
-  justify-content: flex-end;
+  width: fit-content;
   margin: 8px 45px 0 0;
   font-size: 13px;
   font-family: Roboto;
